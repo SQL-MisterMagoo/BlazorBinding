@@ -4,10 +4,12 @@
 <div class="card">
     <h5 class="card-header">This is the parent control</h5>
     <div class="card-body">
-        <p class="card-text">Try clicking the checkbox - the second checkbox will also change because of the Value parameter.</p>
+        <p class="card-text">The second checkbox will also change because of the Value parameter.</p>
         <div class="form-group callout-parent @StateHasChangedCss">
             <label for="parent">Click me (parent control)</label>
+            <!-- Parent level checkbox -->
             <input id="parent" type="checkbox" bind="@ParentValue" />
+            <!-- /Parent level checkbox -->
         </div>
         <DisplayCode>
             @("<input id=parent type=checkbox bind=@ParentValue />")
@@ -17,9 +19,11 @@
 <div class="card">
     <h5 class="card-header">This is the Child control</h5>
     <div class="card-body">
-        <p class="card-text">This is the child control, try clicking the checkbox - it will not update the parent Value.</p>
+        <p class="card-text">Try clicking the checkbox - it will <b class="text-danger">not</b> update the parent Value.</p>
         <div class="form-group callout-child @StateHasChangedCss">
+            <!-- Child level checkbox -->
             <CheckBox3 Value="@ParentValue" />
+            <!-- /Child level checkbox -->
         </div>
         <DisplayCode>
             @(" <CheckBox3 Value=\"@ParentValue\" />")
@@ -39,7 +43,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="alert alert-info">
-                    <span>Page implementation: </span><span class="@StateHasChangedCss">Last refresh @DateTime.Now</span>
+                    <span class="@StateHasChangedCss">Last refresh @DateTime.Now</span>
                 </div>
             </div>
             <div class="col-sm-8">
@@ -47,7 +51,10 @@
             </div>
         </div>
         <p class="card-text">
-            <span>Now click the button to refresh this page - nothing will change except the Last Refresh time, because the Value parameter is a one-way binding</span>
+            Page implementation:
+        </p>
+        <p class="card-text">
+            Now click the button to refresh this page - nothing will change except the Last Refresh time, because the Value parameter is a one-way binding.
         </p>
         <DisplayCode>
             @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
@@ -62,7 +69,9 @@
 
 @functions
 {
+
     bool ParentValue;
     void Refresh(UIMouseEventArgs args) => StateHasChanged();
     string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
+
 }

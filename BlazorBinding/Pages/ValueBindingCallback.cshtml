@@ -1,59 +1,84 @@
 ﻿@page "/vbc"
 <h2>Value Binding With Callback - "Two Way Value Binding - No Refresh"</h2>
-<ul>
-    <li>
-        <div class="form-group">
-            <span>This is the parent control, try clicking the checkbox - the second checkbox will also change because of the Value parameter</span>
-            <input id="parent " type="checkbox" bind="@ParentValue" />
+
+<div class="card">
+    <h5 class="card-header">This is the parent control</h5>
+    <div class="card-body">
+        <p class="card-text">Try clicking the checkbox - the second checkbox will also change because of the Value parameter.</p>
+        <div class="form-group callout-parent @StateHasChangedCss">
+            <label for="parent">Click me (parent control)</label>
+            <!-- Parent level checkbox -->
+            <input id="parent" type="checkbox" bind="@ParentValue" />
+            <!-- /Parent level checkbox -->
         </div>
-        <pre>
-        @("<input id=parent type=checkbox bind=@ParentValue />")
-        </pre>
-    </li>
-    <li>
-        <div class="form-group">
-            <span>This is the child control, try clicking the checkbox - it will not update the parent Value</span>
+        <DisplayCode>
+            @("<input id=parent type=checkbox bind=@ParentValue />")
+        </DisplayCode>
+    </div>
+</div>
+
+<div class="card">
+    <h5 class="card-header">This is the Child control</h5>
+    <div class="card-body">
+        <p class="card-text">Try clicking the checkbox - it will not update the parent Value.</p>
+        <div class="form-group callout-child @StateHasChangedCss">
+            <!-- Child level checkbox -->
             <CheckBox6 bind-Value="@ParentValue" />
+            <!-- /Child level checkbox -->
         </div>
-        <pre>
-        @(" <CheckBox6 bind-Value=\"@ParentValue\" />")
-        </pre>
-        <span>The CheckBox6 implementation : </span><br />
-        <span>Here we bind to a local proxy value so we can fire the ValueChanged event when the local value changes</span>
-        <pre>
-        @("<input type=\"checkbox\" bind=\"")<b>@("@LocalValue")</b>@("\" />")
-        @("@functions {")
-        <b>@("  bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } })")</b>
-        @("  [Parameter] protected bool Value { get; set; }")
-        @("  [Parameter] protected Action<bool> ValueChanged { get; set; })")
-        @("}")
-        </pre>
-    </li>
-    <li>
-        <div class="form-group">
-            <span>Now click the button to refresh this page - the <b>Parent</b> checkbox will revert back to match the Child's value<br />
+        <DisplayCode>
+            @(" <CheckBox6 bind-Value=\"@ParentValue\" />")
+        </DisplayCode>
+        <p class="card-text">The CheckBox6 implementation : </p>
+        <p class="card-text">Here we bind to a local proxy value so we can fire the ValueChanged event when the local value changes.</p>
+        <DisplayCode>
+            @("<input type=\"checkbox\" bind=\"")<b>@("@LocalValue")</b>@("\" />")
+            @("@functions {")
+            <b>@("  bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } })")</b>
+            @("  [Parameter] protected bool Value { get; set; }")
+            @("  [Parameter] protected Action<bool> ValueChanged { get; set; })")
+            @("}")
+        </DisplayCode>
+    </div>
+</div>
+<div class="card">
+    <h5 class="card-header">Invoking StateHasChanged</h5>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="alert alert-info">
+                    <span class="@StateHasChangedCss">Last refresh @DateTime.Now</span>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+            </div>
+        </div>
+        <p class="card-text">
+            Page implementation:
+        </p>
+        <p class="card-text">
+            Now click the button to refresh this page - the <b>Parent</b> checkbox will revert back to match the Child's value<br />
             because we are propogating the value change from child to parent but there is no automatic Refresh<br />
-            <b>The value has propogated back from Child to Parent, but the parent has not refreshed.</b></span>
-            <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
-        </div>
-        <pre>
-        @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
-        </pre>
-    </li>
-    <li class="form-group">
-        <span>Last refresh @DateTime.Now</span>
-    </li>
-</ul>
-<span>Page implementation:</span>
-<pre>
-@("@functions {")
-@("bool ParentValue;")
-@("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
-@("}")
-</pre>
+            <b>The value has propogated back from Child to Parent, but the parent has not refreshed.</b>
+        </p>
+        <DisplayCode>
+            @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
+
+            @("@functions {")
+            @("bool ParentValue;")
+            @("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
+            @("}")
+        </DisplayCode>
+    </div>
+</div>
+
 
 @functions
 {
-bool ParentValue;
-void Refresh(UIMouseEventArgs args) => StateHasChanged();
+
+    bool ParentValue;
+    void Refresh(UIMouseEventArgs args) => StateHasChanged();
+    string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
+
 }

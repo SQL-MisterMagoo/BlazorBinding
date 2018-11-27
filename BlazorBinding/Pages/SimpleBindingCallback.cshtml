@@ -1,59 +1,81 @@
 ﻿@page "/sbc"
 <h2>Simple Binding With Callback - "Two Way Binding"</h2>
-<ul>
-    <li>
-        <div class="form-group">
-            <span>This is the parent control, try clicking the checkbox - the second checkbox will also change because of the Value parameter</span>
-            <input id="parent " type="checkbox" bind="@ParentValue" />
+    <div class="card">
+        <h5 class="card-header">This is the parent control</h5>
+        <div class="card-body">
+            <p class="card-text">Try clicking the checkbox - the second checkbox will also change because of the Value parameter.</p>
+            <div class="form-group callout-parent @StateHasChangedCss">
+                <label for="parent">Click me (parent control)</label>
+                <!-- Parent level checkbox -->
+                <input id="parent" type="checkbox" bind="@ParentValue" />
+                <!-- /Parent level checkbox -->
+            </div>
+            <DisplayCode>
+                @("<input id=parent type=checkbox bind=@ParentValue />")
+            </DisplayCode>
         </div>
-        <pre>
-        @("<input id=parent type=checkbox bind=@ParentValue />")
-        </pre>
-    </li>
-    <li>
-        <div class="form-group">
-            <span>This is the child control, try clicking the checkbox - it <i>will update the parent Value</i></span>
-            <CheckBox4 Value="@ParentValue" Callback="@UpdateValue" />
-        </div>
-        <pre>
-        @(" <CheckBox4 Value=\"@ParentValue\" />")
-        </pre>
-        <span>The CheckBox4 implementation : </span><br />
-        <span>Here we bind to a local proxy value so we can fire the Callback when the local value changes</span>
-        <pre>
+    </div>
+
+    <div class="card">
+        <h5 class="card-header">This is the Child control</h5>
+        <div class="card-body">
+            <p class="card-text">This is the child control, try clicking the checkbox - it <i>will update the parent Value</i>.</p>
+            <div class="form-group callout-child @StateHasChangedCss">
+                <!-- Child level checkbox -->
+                <CheckBox4 Value="@ParentValue" Callback="@UpdateValue" />
+                <!-- /Child level checkbox -->
+            </div>
+            <DisplayCode>
+                @(" <CheckBox4 Value=\"@ParentValue\" />")
+            </DisplayCode>
+            <p class="card-text">The CheckBox4 implementation : </p>
+            <p class="card-text">Here we bind to a local proxy value so we can fire the Callback when the local value changes.</p>
+            <DisplayCode>
         @("<input type=\"checkbox\" bind=\"")<b>@("@LocalValue")</b>@("\" />")
         @("@functions {")
         @("[Parameter] protected bool Value { get; set; }")
         <b>@("bool LocalValue { get { return Value; } set { Callback?.Invoke(value); } }")
         @("[Parameter] protected Action<bool> Callback { get; set; }")</b>
         @("}")
-        </pre>
-    </li>
-    <li>
-        <div class="form-group">
-            <span>Now click the button to refresh this page - nothing will change except the Last Refresh time, because we are propogating the value back from Child to Parent and refreshing the Parent</span>
-            <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+            </DisplayCode>
         </div>
-        <pre>
-        @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
-        </pre>
-    </li>
-    <li class="form-group">
-        <span>Last refresh @DateTime.Now</span>
-    </li>
-</ul>
-<span>Page implementation:</span>
-<pre>
-@("@functions {")
-@("bool ParentValue;")
-@("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
-<b>@("void UpdateValue(bool value) { ParentValue = value; Refresh(null); })")</b>
-@("}")
-</pre>
+    </div>
+    <div class="card">
+        <h5 class="card-header">Invoking StateHasChanged</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="alert alert-info">
+                        <span class="@StateHasChangedCss">Last refresh @DateTime.Now</span>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+                </div>
+            </div>
+            <p class="card-text">
+                Page implementation:
+            </p>
+            <p class="card-text">
+                Now click the button to refresh this page - nothing will change except the Last Refresh time, because we are propogating the value back from Child to Parent and refreshing the Parent.
+            </p>
+            <DisplayCode>
+                @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
+
+                @("@functions {")
+                @("bool ParentValue;")
+                @("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
+                <b>@("void UpdateValue(bool value) { ParentValue = value; Refresh(null); })")</b>
+                @("}")
+            </DisplayCode>
+        </div>
+    </div>
 
 @functions
 {
-  bool ParentValue;
-  void Refresh(UIMouseEventArgs args) => StateHasChanged();
-  void UpdateValue(bool value) { ParentValue = value; Refresh(null); }
+    bool ParentValue;
+    void Refresh(UIMouseEventArgs args) => StateHasChanged();
+    void UpdateValue(bool value) { ParentValue = value; Refresh(null); }
+    string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
+
 }
