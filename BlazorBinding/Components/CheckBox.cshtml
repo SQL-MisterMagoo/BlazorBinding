@@ -1,0 +1,8 @@
+﻿
+<input type="checkbox" bind="@Value" />
+
+
+@functions
+{
+  [CascadingParameter(Name = "ParentValue")] bool Value { get; set; }
+}

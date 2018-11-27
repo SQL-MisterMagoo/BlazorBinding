@@ -1,0 +1,9 @@
+﻿
+<input type="checkbox" bind="@LocalValue" />
+
+
+@functions {
+bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } }
+[Parameter] protected bool Value { get; set; }
+[Parameter] protected Action<bool> ValueChanged { get; set; }
+}

@@ -1,0 +1,58 @@
+﻿@page "/vb"
+<h2>Value Binding - "One Way Value Passing"</h2>
+<ul>
+    <li>
+        <div class="form-group">
+            <span>This is the parent control, try clicking the checkbox - the second checkbox will also change because of the Value parameter</span>
+            <input id="parent " type="checkbox" bind="@ParentValue" />
+        </div>
+        <pre>
+        @("<input id=parent type=checkbox bind=@ParentValue />")
+        </pre>
+    </li>
+    <li>
+        <div class="form-group">
+                <span>This is the child control, try clicking the checkbox - it will not update the parent Value</span>
+                <CheckBox5 bind-Value="@ParentValue" />
+        </div>
+        <pre>
+        @(" <CheckBox5 bind-Value=\"@ParentValue\" />")
+        </pre>
+        <span>The CheckBox5 implementation : </span><br />
+        <span>The "ValueChanged" Action is <b>required</b> by the Blazor engine because we are using the bind-Value syntax</span>
+        <pre>
+        @("<input type=\"checkbox\" bind=\"@Value\" />")
+        @("@functions {")
+        @("  [Parameter] protected bool Value { get; set; }")
+        @("  [Parameter] protected Action<bool> ValueChanged { get; set; })")
+        @("}")
+        </pre>
+    </li>
+    <li>
+        <div class="form-group">
+            <span>Now click the button to refresh this page - the child checkbox will revert back to match the parent value<br />
+            because we are doing nothing to propogate the value change from child to parent<br />
+            and Blazor does not do it for us, despite requiring the ValueChanged Action.</span>
+            <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+        </div>
+        <pre>
+        @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
+        </pre>
+    </li>
+    <li class="form-group">
+        <span>Last refresh @DateTime.Now</span>
+    </li>
+</ul>
+<span>Page implementation:</span>
+<pre>
+@("@functions {")
+@("bool ParentValue;")
+@("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
+@("}")
+</pre>
+
+@functions
+{
+bool ParentValue;
+void Refresh(UIMouseEventArgs args) => StateHasChanged();
+}

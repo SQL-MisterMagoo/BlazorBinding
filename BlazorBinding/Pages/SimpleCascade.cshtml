@@ -1,0 +1,59 @@
+﻿@page "/sc"
+<h2>Simple Cascading Value - "One Way Binding"</h2>
+<ul>
+    <li>
+        <div class="form-group">
+            <span>This is the parent control, try clicking the checkbox - the second checkbox will also change because of the CascadingValue</span>
+            <input id="parent " type="checkbox" bind="@ParentValue" />
+        </div>
+        <pre>
+        @("<input id=parent type=checkbox bind=@ParentValue />")
+        </pre>
+    </li>
+    <li>
+        <div class="form-group">
+            <CascadingValue Name="ParentValue" Value="@ParentValue">
+                <span>This is the child control, try clicking the checkbox - it will not update the parent Value</span>
+                <CheckBox />
+            </CascadingValue>
+        </div>
+        <pre>
+        @("<CascadingValue Name=\"ParentValue\" Value=\"@ParentValue\">")
+        @(" <label>this is the child control, try clicking the checkbox</label>")
+        @(" <CheckBox />")
+        @("</CascadingValue>")
+        </pre>
+        <span>The CheckBox implementation : </span>
+        <pre>
+        @("<input type=\"checkbox\" bind=\"@Value\" />")
+        @("@functions {")
+        @("  [CascadingParameter(Name =\"ParentValue\")] bool Value { get; set; }")
+        @("}")
+        </pre>
+    </li>
+    <li>
+        <div class="form-group">
+            <span>Now click the button to refresh this page - nothing will change except the Last Refresh time, because the CascadingValue is a one-way binding</span>
+            <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+        </div>
+        <pre>
+        @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
+        </pre>
+    </li>
+    <li class="form-group">
+        <span>Last refresh @DateTime.Now</span>
+    </li>
+</ul>
+<span>Page implementation:</span>
+<pre>
+@("@functions {")
+@("bool ParentValue;")
+@("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
+@("}")
+</pre>
+
+@functions
+{
+bool ParentValue;
+void Refresh(UIMouseEventArgs args) => StateHasChanged();
+}

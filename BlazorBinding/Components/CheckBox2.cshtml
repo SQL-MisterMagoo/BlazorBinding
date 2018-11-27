@@ -1,0 +1,9 @@
+﻿
+<input type="checkbox" bind="@Value" />
+
+
+@functions {
+[CascadingParameter(Name = "ParentValue")] bool ParentValue { get; set; }
+bool Value { get { return ParentValue; } set { Callback?.Invoke(value); } }
+[Parameter] protected Action<bool> Callback { get; set; }
+}
