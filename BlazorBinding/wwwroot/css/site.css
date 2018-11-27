@@ -84,6 +84,128 @@ app {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Docs */
+.card {
+    margin-bottom:5px;
+}
+.code-highlight {
+    overflow: auto;
+    background: #222;
+    color: #C1C2C3;
+    padding: 5px 5px;
+    border-left: 20px solid #35383c;
+}
+    .code-highlight pre {
+        color: #C1C2C3;
+        margin:0;
+    }
+
+
+.callout-parent {
+    border-left: 5px solid #17a2b8;
+    padding-left: 5px;
+}
+
+.callout-child {
+    border-left: 5px solid #ffc107;
+    padding-left: 5px;
+}
+
+.ping-on {
+    -webkit-animation-name: ping; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+    animation-name: ping;
+    animation-duration: 1s;
+
+}
+.ping-off {
+    -webkit-animation-name: ping-off; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+    animation-name: ping-off;
+    animation-duration: 1s;
+}
+span[class^="ping-date-"] {
+    -webkit-animation-name: ping-off; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+    animation-name: ping-off;
+    animation-duration: 1s;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes ping {
+    0% {
+        background-color: white;
+    }
+
+    25% {
+        background-color: yellow;
+    }
+
+    50% {
+        background-color: yellow;
+    }
+
+    100% {
+        background-color: white;
+    }
+}
+
+/* Standard syntax */
+@keyframes ping {
+    0% {
+        background-color: white;
+    }
+
+    25% {
+        background-color: yellow;
+    }
+
+    50% {
+        background-color: yellow;
+    }
+
+    100% {
+        background-color: white;
+    }
+}
+
+@-webkit-keyframes ping-off {
+    0% {
+        background-color: white;
+    }
+
+    25% {
+        background-color: yellow;
+    }
+
+    50% {
+        background-color: yellow;
+    }
+
+    100% {
+        background-color: white;
+    }
+}
+
+/* Standard syntax */
+@keyframes ping-off {
+    0% {
+        background-color: white;
+    }
+
+    25% {
+        background-color: yellow;
+    }
+
+    50% {
+        background-color: yellow;
+    }
+
+    100% {
+        background-color: white;
+    }
+}
+
 @media (max-width: 767.98px) {
     .main .top-row {
         display: none;

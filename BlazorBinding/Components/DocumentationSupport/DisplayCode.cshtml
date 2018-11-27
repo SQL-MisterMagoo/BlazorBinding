@@ -1,0 +1,22 @@
+﻿<div class="code-highlight-wrap">
+    <a class="btn-sm btn btn-light" onclick="@ToggleCode">@ToggleText code</a>
+    <div class="code-highlight" style="@ToggleCss">
+        <pre>
+            <code>
+                @ChildContent
+            </code>
+        </pre>
+    </div>
+</div>
+
+@functions {
+    bool displayCode = true;
+    [Parameter] protected RenderFragment ChildContent { get; set; }
+    string ToggleCss => displayCode ? "display:block" : "display:none";
+    string ToggleText => displayCode ? "hide" : "show";
+    void ToggleCode() {
+        displayCode = !displayCode;
+        StateHasChanged();
+    }
+
+}
