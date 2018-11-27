@@ -1,0 +1,18 @@
+﻿<div class="card">
+    <h5 class="card-header">@Header</h5>
+    <div class="card-body">
+        <p class="card-text">@Introduction</p>
+
+        @ChildContent
+    </div>
+</div>
+
+@functions {
+
+    [Parameter] protected string Header { get; set; }
+
+    [Parameter] protected string Introduction { get; set; }
+
+    [Parameter] protected RenderFragment ChildContent { get; set; }
+
+}

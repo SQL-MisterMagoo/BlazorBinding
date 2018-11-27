@@ -1,54 +1,68 @@
 ﻿@page "/sb"
 <h2>Simple Binding Value - "One Way Binding"</h2>
-<ul>
-    <li>
-        <div class="form-group">
-            <span>This is the parent control, try clicking the checkbox - the second checkbox will also change because of the Value parameter</span>
-            <input id="parent " type="checkbox" bind="@ParentValue" />
+
+<div class="card">
+    <h5 class="card-header">This is the parent control</h5>
+    <div class="card-body">
+        <p class="card-text">Try clicking the checkbox - the second checkbox will also change because of the Value parameter.</p>
+        <div class="form-group callout-parent @StateHasChangedCss">
+            <label for="parent">Click me (parent control)</label>
+            <input id="parent" type="checkbox" bind="@ParentValue" />
         </div>
-        <pre>
-        @("<input id=parent type=checkbox bind=@ParentValue />")
-        </pre>
-    </li>
-    <li>
-        <div class="form-group">
-                <span>This is the child control, try clicking the checkbox - it will not update the parent Value</span>
-                <CheckBox3 Value="@ParentValue" />
+        <DisplayCode>
+            @("<input id=parent type=checkbox bind=@ParentValue />")
+        </DisplayCode>
+    </div>
+</div>
+<div class="card">
+    <h5 class="card-header">This is the Child control</h5>
+    <div class="card-body">
+        <p class="card-text">This is the child control, try clicking the checkbox - it will not update the parent Value.</p>
+        <div class="form-group callout-child @StateHasChangedCss">
+            <CheckBox3 Value="@ParentValue" />
         </div>
-        <pre>
-        @(" <CheckBox3 Value=\"@ParentValue\" />")
-        </pre>
-        <span>The CheckBox3 implementation : </span>
-        <pre>
-        @("<input type=\"checkbox\" bind=\"@Value\" />")
-        @("@functions {")
-        @("  [Parameter] protected bool Value { get; set; }")
-        @("}")
-        </pre>
-    </li>
-    <li>
-        <div class="form-group">
+        <DisplayCode>
+            @(" <CheckBox3 Value=\"@ParentValue\" />")
+        </DisplayCode>
+        <p class="card-text">The CheckBox3 implementation : </p>
+        <DisplayCode>
+            @("<input type=\"checkbox\" bind=\"@Value\" />")
+            @("@functions {")
+            @("  [Parameter] protected bool Value { get; set; }")
+            @("}")
+        </DisplayCode>
+    </div>
+</div>
+<div class="card">
+    <h5 class="card-header">Invoking StateHasChanged</h5>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="alert alert-info">
+                    <span>Page implementation: </span><span class="@StateHasChangedCss">Last refresh @DateTime.Now</span>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+            </div>
+        </div>
+        <p class="card-text">
             <span>Now click the button to refresh this page - nothing will change except the Last Refresh time, because the Value parameter is a one-way binding</span>
-            <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
-        </div>
-        <pre>
-        @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
-        </pre>
-    </li>
-    <li class="form-group">
-        <span>Last refresh @DateTime.Now</span>
-    </li>
-</ul>
-<span>Page implementation:</span>
-<pre>
-@("@functions {")
-@("bool ParentValue;")
-@("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
-@("}")
-</pre>
+        </p>
+        <DisplayCode>
+            @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
+
+            @("@functions {")
+            @("bool ParentValue;")
+            @("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
+            @("}")
+        </DisplayCode>
+    </div>
+</div>
 
 @functions
 {
-bool ParentValue;
-void Refresh(UIMouseEventArgs args) => StateHasChanged();
+    bool ParentValue;
+    void Refresh(UIMouseEventArgs args) => StateHasChanged();
+    string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
 }
