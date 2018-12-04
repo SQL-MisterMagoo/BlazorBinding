@@ -17,6 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Highlight.Netstandard">
+      <HintPath>..\..\highlight\src\Highlight.Netstandard\bin\Debug\netstandard2.0\Highlight.Netstandard.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="Components\CheckBox6.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -33,6 +39,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Pages\CascadeCallback.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Pages\SimpleBindingObjectCallback.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Pages\ValueBindingCallbackRefresh.cshtml">

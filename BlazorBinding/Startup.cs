@@ -1,3 +1,4 @@
+using BlazorBinding.Services;
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,6 +8,7 @@ namespace BlazorBinding
 	{
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddSingleton<ICodeHighlighter, CodeHighlighter>((sp) => new CodeHighlighter());
 		}
 
 		public void Configure(IBlazorApplicationBuilder app)

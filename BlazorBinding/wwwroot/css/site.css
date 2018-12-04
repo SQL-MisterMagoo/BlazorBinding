@@ -88,13 +88,19 @@ app {
 .card {
     margin-bottom:5px;
 }
+
+.card input[type=checkbox] {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+}
+
 .code-highlight {
     overflow: auto;
-    padding: 15px;
-    border-left: 20px solid #bdbdbd;
-    border-top: 1px solid #d3d9df;
-    border-bottom: 1px solid #d3d9df;
-    border-right: 1px solid #d3d9df;
+    background: rgba(2,2,2,0.1);
+    color: #C1C2C3;
+    padding: 5px 5px;
+    border-left: 20px solid rgba(2,2,2,0.3);
 }
     .code-highlight pre {
         color: #C1C2C3;
@@ -219,7 +225,7 @@ span[class^="ping-date-"] {
     }
 
     .sidebar {
-        width: 350px;
+        min-width: 330px;
         height: 100vh;
         position: sticky;
         top: 0;

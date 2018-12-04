@@ -1,9 +1,22 @@
-﻿<label for="child">Click me (child control)</label>
+﻿@using BlazorBinding.Pages
+<label for="child">Click me (child control)</label>
 <input id="child" type="checkbox" bind="@Value" />
 
 
 @functions {
-[CascadingParameter(Name = "ParentValue")] bool ParentValue { get; set; }
-bool Value { get { return ParentValue; } set { Callback?.Invoke(value); } }
-[Parameter] protected Action<bool> Callback { get; set; }
+  [CascadingParameter(Name = "ParentValue")] CascadeCallbackModel ParentData { get; set; }
+
+  bool Value
+  {
+      get
+      {
+          return ParentData.ParentValue;
+      }
+      set
+      {
+          ParentData.AddEvent("Child", $"Bound Value Changed {value}");
+          Callback?.Invoke(value);
+      }
+  }
+  [Parameter] protected Action<bool> Callback { get; set; }
 }

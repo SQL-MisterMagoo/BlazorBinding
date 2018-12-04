@@ -1,0 +1,16 @@
+﻿
+[ @ChildContent ]
+
+@functions
+{
+  [Parameter] protected RenderFragment ChildContent { get; set; }
+  [Parameter] protected List<string> CodeStore { get; set; }
+
+  protected override void OnAfterRender()
+  {
+      Console.WriteLine("AFTERRENDER");
+      Console.WriteLine(ChildContent);
+  }
+  //
+
+}

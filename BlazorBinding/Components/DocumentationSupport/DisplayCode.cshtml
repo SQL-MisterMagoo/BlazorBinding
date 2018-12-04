@@ -1,102 +1,39 @@
-﻿<div class="code-highlight-wrap">
+﻿@using BlazorBinding.Services
+@using Microsoft.AspNetCore.Blazor.Browser
+@inject ICodeHighlighter CodeHighlighter
+
+<div class="code-highlight-wrap">
     <a class="btn-sm btn btn-light" onclick="@ToggleCode">@ToggleText code</a>
-    <div class="code-highlight" style="@ToggleCss" id="@id">
-        <pre>
-        @ChildContent
-        </pre>
+    <div class="code-highlight" style="@ToggleCss">
+        <pre><code>@CodeMarkup</code></pre>
     </div>
 </div>
 
 @functions {
-    bool displayCode = true;
-    [Parameter] protected RenderFragment ChildContent { get; set; }
-    [Parameter] protected string Language { get; set; } = "html";
+  bool displayCode = true;
+  [Parameter] protected string Language { get; set; }
+  [Parameter] protected string Code { get; set; }
 
-    string ToggleCss => displayCode ? "display:block" : "display:none";
-    string ToggleText => displayCode ? "hide" : "show";
-    void ToggleCode()
-    {
-        displayCode = !displayCode;
-        StateHasChanged();
-    }
+  private MarkupString CodeMarkup
+  {
+      get
+      {
+          switch(Language.ToUpper())
+          {
+              case "HTML":
+                  return (MarkupString)CodeHighlighter?.HighlightHtml(Code);
+              case "CSHARP":
+                  return (MarkupString)CodeHighlighter?.HighlightCSharp(Code);
+          }
+          return (MarkupString)"";
+      }
+  }
 
-    string id;
+  string ToggleCss => displayCode ? "display:block" : "display:none";
+  string ToggleText => displayCode ? "hide" : "show";
+  void ToggleCode() {
+      displayCode = !displayCode;
+      StateHasChanged();
+  }
 
-    protected override void OnInit()
-    {
-        // add a unique ID to inner div so we can retrieve the rendered code (unhighlighted)
-        id = $"displayCode{nextId++}";
-        base.OnInit();
-    }
-
-    private static int nextId = 1;
-
-    /// <summary>
-    /// Store original code content
-    /// </summary>
-    string code = null;
-
-    protected override async Task OnAfterRenderAsync()
-    {
-        // only process once
-        if (code == null)
-        {
-            Console.WriteLine($"Getting code for {id}");
-            // get the rendered ChildContent via JS interop
-            code = await GetInnerText(id);
-            code = Cleanup(code);
-            // apply syntax highlighting to it
-            var html = GetSyntaxHighlightedHtml();
-            await SetInnerHTML(id, html);
-        }
-        await base.OnAfterRenderAsync();
-    }
-
-    private string GetSyntaxHighlightedHtml()
-    {
-        // determine the language to use
-        var lang = ColorCode.Languages.FindById(Language);
-        // check for an error in the requested Language parameter
-        if (lang == null)
-        {
-            var langName = System.Net.WebUtility.HtmlEncode(Language);
-            return $"<span style='color: red'>Unable to parse language <b>{langName}</b></span>";
-        }
-        // create the HTML formatter and return the formatted code as HTML
-        var formatter = new ColorCode.HtmlFormatter();
-        return formatter.GetHtmlString(code, lang);
-    }
-
-    /// <summary>
-    /// Due to the pre tag, we get blank lines in the code - this removes them
-    /// </summary>
-    /// <param name="code"></param>
-    /// <returns></returns>
-    string Cleanup(string code)
-    {
-        var lines = code.Split('\n');
-        var noBlanks = (from l in lines where l.Trim() != "" select l);
-        return string.Join("\n", noBlanks);
-    }
-
-    /// <summary>
-    /// Call Javascript e.getElementById and return innerText property
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    private static async Task<string> GetInnerText(string id)
-    {
-        return await JSRuntime.Current.InvokeAsync<string>("getInnerText", id);
-    }
-
-    /// <summary>
-    /// Write the updated HTML content back
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="html"></param>
-    /// <returns></returns>
-    private static async Task SetInnerHTML(string id, string html)
-    {
-        await JSRuntime.Current.InvokeAsync<string>("setHtml", id, html);
-    }
 }
