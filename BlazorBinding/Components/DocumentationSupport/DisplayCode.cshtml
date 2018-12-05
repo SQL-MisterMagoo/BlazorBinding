@@ -5,36 +5,36 @@
 <div class="code-highlight-wrap">
     <a class="btn-sm btn btn-light" onclick="@ToggleCode">@ToggleText code</a>
     <div class="code-highlight" style="@ToggleCss">
-        <pre><code>@CodeMarkup</code></pre>
+        @CodeMarkup
     </div>
 </div>
 
 @functions {
-  bool displayCode = true;
-  [Parameter] protected string Language { get; set; } = "HTML";
-  [Parameter] protected string[] Code { get; set; }
+bool displayCode = true;
+[Parameter] protected string Language { get; set; } = "HTML";
+[Parameter] protected string[] Code { get; set; }
 
-  private MarkupString CodeMarkup
-  {
-      get
-      {
-          switch (Language.ToUpper())
-          {
-              case "HTML":
-                  return (MarkupString)string.Join("\n", Code.Select(c => CodeHighlighter.HighlightHtml(c)));
-              case "CSHARP":
-                  return (MarkupString)string.Join("\n", Code.Select(c => CodeHighlighter.HighlightCSharp(c)));
-          }
-          return (MarkupString)string.Join("\n", Code);
-      }
-  }
+private MarkupString CodeMarkup
+{
+    get
+    {
+        switch (Language.ToUpper())
+        {
+            case "HTML":
+                return (MarkupString)CodeHighlighter.HighlightHtml(string.Join("\n", Code));
+            case "CSHARP":
+                return (MarkupString)CodeHighlighter.HighlightCSharp(string.Join("\n", Code));
+        }
+        return (MarkupString)string.Join("\n", Code);
+    }
+}
 
-  string ToggleCss => displayCode ? "display:block" : "display:none";
-  string ToggleText => displayCode ? "hide" : "show";
-  void ToggleCode()
-  {
-      displayCode = !displayCode;
-      StateHasChanged();
-  }
+string ToggleCss => displayCode ? "display:block" : "display:none";
+string ToggleText => displayCode ? "hide" : "show";
+void ToggleCode()
+{
+    displayCode = !displayCode;
+    StateHasChanged();
+}
 
 }

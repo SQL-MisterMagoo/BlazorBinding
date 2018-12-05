@@ -8,18 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ColorCode.Core" Version="2.0.6" />
     <PackageReference Include="ColorCode.HTML" Version="2.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.7.0" PrivateAssets="all" />
 
     <DotNetCliToolReference Include="Microsoft.AspNetCore.Blazor.Cli" Version="0.6.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Highlight.Netstandard">
-      <HintPath>..\..\highlight\src\Highlight.Netstandard\bin\Debug\netstandard2.0\Highlight.Netstandard.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

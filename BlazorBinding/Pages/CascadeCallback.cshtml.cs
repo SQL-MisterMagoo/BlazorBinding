@@ -1,8 +1,4 @@
-﻿using Highlight;
-using Highlight.Configuration;
-using Highlight.Engines;
-using Highlight.Patterns;
-using Microsoft.AspNetCore.Blazor;
+﻿using Microsoft.AspNetCore.Blazor;
 using Microsoft.AspNetCore.Blazor.Components;
 using System;
 using System.Collections.Generic;
