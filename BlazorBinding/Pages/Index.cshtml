@@ -1,8 +1,21 @@
 ﻿@page "/"
 
-<h1>Data Binding Examples</h1>
 
-<hr />
+<div class="card">
+    <h1 class="card-header">Data Binding Examples</h1>
+    <div class="card-body">
+        <p class="card-text">
+            This is a working example of various binding techniques for Blazor.
+        </p>
+        <p class="card-text">
+            Please use the menu to work through the different options - if you work down the list, I think you will see how we have to accomodate the fact there are some <i>issues</i> in data-binding in Blazor.
+        </p>
+        <p class="card-text">
+            The code is on GitHub <a href="https://github.com/SQL-MisterMagoo/BlazorBinding">Blazor Binding Source</a>
+        </p>
+    </div>
+</div>
+
 <div class="card">
     <h5 class="card-header">Changelog</h5>
     <div class="card-body">
@@ -10,10 +23,21 @@
             <h6 class="card-header">5th December 2018</h6>
             <div class="card-body">
                 <p class="card-text">Now using a new DisplayCode component that is simpler and highlights syntax</p>
+                <p class="card-text">The syntax highlighting is implemented using <a href="https://github.com/SQL-MisterMagoo/highlight">my dotnetstandard fork</a> of the project <a href="https://github.com/thomasjo/highlight">highlight by thomasjo</a></p>
                 <div class="form-group callout-child">
                     <DisplayCode Code="@(new[] {
                 "<DisplayCode Code=\"@(new[] {\"<input id=\"parent\" type=\"checkbox\" bind=\"@ParentValue\" />\"})\" />",
                 })" />
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <h6 class="card-header">27th November 2018</h6>
+            <div class="card-body">
+                <p class="card-text">Style update from <a href="https://www.twitch.tv/edcharbeneau">Ed Charbeneau</a>, including these cards</p>
+                <div class="form-group callout-child">
+                    Watch Ed's show #StateHasChanged on Twitch
+                    <a href="https://www.twitch.tv/edcharbeneau">#StateHasChanged</a>
                 </div>
             </div>
         </div>
