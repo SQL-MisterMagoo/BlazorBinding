@@ -11,9 +11,9 @@
             <input id="parent" type="checkbox" bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
-        <DisplayCode>
-            @("<input id=parent type=checkbox bind=@ParentValue />")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<input id=\"parent\" type=\"checkbox\" bind=\"@ParentValue\" />",
+            })"/>
     </div>
 </div>
 <div class="card">
@@ -25,19 +25,22 @@
             <CheckBox6 bind-Value="@ParentValue" />
             <!-- /Child level checkbox -->
         </div>
-        <DisplayCode>
-            @(" <CheckBox6 bind-Value=\"@ParentValue\" />")
-            </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            " <CheckBox6 bind-Value=\"@ParentValue\" />",
+            })"/>
         <p class="card-text">The CheckBox6 implementation : </p>
         <p class="card-text">Here we bind to a local proxy value so we can fire the ValueChanged event when the local value changes.</p>
-        <DisplayCode>
-            @("<input type=\"checkbox\" bind=\"@LocalValue\" />")
-            @("@functions {")
-            @("  bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } })")
-            @("  [Parameter] protected bool Value { get; set; }")
-            @("  [Parameter] protected Action<bool> ValueChanged { get; set; })")
-            @("}")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<input type=\"checkbox\" bind=\"@LocalValue\" />",
+            })"/>
+        <DisplayCode Language="CSharp" 
+            Code="@(new[]{
+            "@functions {",
+            "  bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } })",
+            "  [Parameter] protected bool Value { get; set; }",
+            "  [Parameter] protected Action<bool> ValueChanged { get; set; })",
+            "}",
+            })"/>
     </div>
 </div>
 <div class="card">
@@ -60,15 +63,14 @@
             Now click the button to refresh this page - Nothing will change except the Last Refresh time, <br />
             because <b>we are propogating the value change from child to parent and raising a Refresh</b>
         </p>
-        <DisplayCode>
-            @("@functions {")
-            <b>
-                @("bool localParentValue;")
-            @("bool ParentValue { get { return localParentValue; } set { localParentValue = value; Refresh(null); } }")
-        </b>
-        @("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
-        @("}")
-        </DisplayCode>
+        <DisplayCode Language="CSharp"
+            Code="@(new[]{
+            "@functions {",
+            "bool localParentValue;",
+            "bool ParentValue { get { return localParentValue; } set { localParentValue = value; Refresh(null); } }",
+            "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+            "}",
+            })" />
     </div>
 </div>
 

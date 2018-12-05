@@ -11,9 +11,9 @@
             <input id="parent" type="checkbox" bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
-        <DisplayCode>
-            @("<input id=parent type=checkbox bind=@ParentValue />")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<input id=\"parent\" type=\"checkbox\" bind=\"@ParentValue\" />",
+            })"/>
     </div>
 </div>
 
@@ -26,19 +26,22 @@
             <CheckBox6 bind-Value="@ParentValue" />
             <!-- /Child level checkbox -->
         </div>
-        <DisplayCode>
-            @(" <CheckBox6 bind-Value=\"@ParentValue\" />")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            " <CheckBox6 bind-Value=\"@ParentValue\" />",
+            })"/>
         <p class="card-text">The CheckBox6 implementation : </p>
         <p class="card-text">Here we bind to a local proxy value so we can fire the ValueChanged event when the local value changes.</p>
-        <DisplayCode>
-            @("<input type=\"checkbox\" bind=\"")<b>@("@LocalValue")</b>@("\" />")
-            @("@functions {")
-            <b>@("  bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } })")</b>
-            @("  [Parameter] protected bool Value { get; set; }")
-            @("  [Parameter] protected Action<bool> ValueChanged { get; set; })")
-            @("}")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<input type=\"checkbox\" bind=\"@LocalValue\" />",
+            })"/>
+        <DisplayCode Language="CSharp" 
+            Code="@(new[]{
+            "@functions {",
+            "  bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } })",
+            "  [Parameter] protected bool Value { get; set; }",
+            "  [Parameter] protected Action<bool> ValueChanged { get; set; })",
+            "}",
+            })"/>
     </div>
 </div>
 <div class="card">
@@ -62,14 +65,16 @@
             because we are propogating the value change from child to parent but there is no automatic Refresh<br />
             <b>The value has propogated back from Child to Parent, but the parent has not refreshed.</b>
         </p>
-        <DisplayCode>
-            @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
-
-            @("@functions {")
-            @("bool ParentValue;")
-            @("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
-            @("}")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>",
+            })"/>
+        <DisplayCode Language="CSharp" 
+            Code="@(new[]{
+            "@functions {",
+            "bool ParentValue;",
+            "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+            "}",
+        })"/>
     </div>
 </div>
 

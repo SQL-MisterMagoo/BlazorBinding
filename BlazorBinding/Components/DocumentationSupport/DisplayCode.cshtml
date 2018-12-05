@@ -11,27 +11,28 @@
 
 @functions {
   bool displayCode = true;
-  [Parameter] protected string Language { get; set; }
-  [Parameter] protected string Code { get; set; }
+  [Parameter] protected string Language { get; set; } = "HTML";
+  [Parameter] protected string[] Code { get; set; }
 
   private MarkupString CodeMarkup
   {
       get
       {
-          switch(Language.ToUpper())
+          switch (Language.ToUpper())
           {
               case "HTML":
-                  return (MarkupString)CodeHighlighter?.HighlightHtml(Code);
+                  return (MarkupString)string.Join("\n", Code.Select(c => CodeHighlighter.HighlightHtml(c)));
               case "CSHARP":
-                  return (MarkupString)CodeHighlighter?.HighlightCSharp(Code);
+                  return (MarkupString)string.Join("\n", Code.Select(c => CodeHighlighter.HighlightCSharp(c)));
           }
-          return (MarkupString)"";
+          return (MarkupString)string.Join("\n", Code);
       }
   }
 
   string ToggleCss => displayCode ? "display:block" : "display:none";
   string ToggleText => displayCode ? "hide" : "show";
-  void ToggleCode() {
+  void ToggleCode()
+  {
       displayCode = !displayCode;
       StateHasChanged();
   }

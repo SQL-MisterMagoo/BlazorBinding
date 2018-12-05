@@ -11,9 +11,9 @@
             <input id="parent" type="checkbox" bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
-        <DisplayCode>
-            @("<input id=parent type=checkbox bind=@ParentValue />")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<input id=\"parent\" type=\"checkbox\" bind=\"@ParentValue\" />"
+            })"/>
     </div>
 </div>
 
@@ -26,18 +26,21 @@
             <CheckBox5 bind-Value="@ParentValue" />
             <!-- /Child level checkbox -->
         </div>
-        <DisplayCode>
-            @(" <CheckBox5 bind-Value=\"@ParentValue\" />")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            " <CheckBox5 bind-Value=\"@ParentValue\" />"
+            })"/>
         <p class="card-text">The CheckBox5 implementation : </p>
         <p class="card-text">The "ValueChanged" Action is <b>required</b> by the Blazor engine because we are using the bind-Value syntax.</p>
-        <DisplayCode>
-            @("<input type=\"checkbox\" bind=\"@Value\" />")
-            @("@functions {")
-            @("  [Parameter] protected bool Value { get; set; }")
-            @("  [Parameter] protected Action<bool> ValueChanged { get; set; })")
-            @("}")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<input type=\"checkbox\" bind=\"@Value\" />"
+            })"/>
+        <DisplayCode Language="CSharp" 
+            Code="@(new[]{
+            "@functions {",
+            "  [Parameter] protected bool Value { get; set; }",
+            "  [Parameter] protected Action<bool> ValueChanged { get; set; })",
+            "}",
+            })"/>
     </div>
 </div>
 
@@ -63,14 +66,16 @@
             because we are doing nothing to propogate the value change from child to parent<br />
             and Blazor does not do it for us, despite requiring the ValueChanged Action.
         </p>
-        <DisplayCode>
-            @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
-
-            @("@functions {")
-            @("bool ParentValue;")
-            @("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
-            @("}")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>",
+            })"/>
+        <DisplayCode Language="CSharp" 
+            Code="@(new[]{
+            "@functions {",
+            "bool ParentValue;",
+            "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+            "}",
+            })"/>
     </div>
 </div>
 

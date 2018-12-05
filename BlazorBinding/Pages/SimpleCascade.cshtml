@@ -11,9 +11,9 @@
             <input id="parent" type="checkbox" bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
-        <DisplayCode>
-            @("<input id=parent type=checkbox bind=@ParentValue />")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<input id=\"parent\" type=\"checkbox\" bind=\"@ParentValue\" />"
+        })"/>
     </div>
 </div>
 
@@ -28,18 +28,21 @@
             </CascadingValue>
             <!-- /Child level checkbox -->
         </div>
-        <DisplayCode>
-            @("<CascadingValue Name=\"ParentValue\" Value=\"@ParentValue\">")
-            @(" <CheckBox />")
-            @("</CascadingValue>")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<CascadingValue Name=\"ParentValue\" Value=\"@ParentValue\">",
+            " <CheckBox />",
+            "</CascadingValue>",
+        })"/>
         <p class="card-text">The CheckBox implementation : </p>
-        <DisplayCode>
-            @("<input type=\"checkbox\" bind=\"@Value\" />")
-            @("@functions {")
-            @("  [CascadingParameter(Name =\"ParentValue\")] bool Value { get; set; }")
-            @("}")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<input type=\"checkbox\" bind=\"@Value\" />"
+            })"/>
+        <DisplayCode Language="CSharp" 
+            Code="@(new[]{
+            "@functions {",
+            "  [CascadingParameter(Name =\"ParentValue\")] bool Value { get; set; }",
+            "}",
+            })"/>
     </div>
 </div>
 <div class="card">
@@ -61,13 +64,16 @@
         <p class="card-text">
             Now click the button to refresh this page - nothing will change except the Last Refresh time, because the CascadingValue is a one-way binding
         </p>
-        <DisplayCode>
-            @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
-            @("@functions {")
-            @("bool ParentValue;")
-            @("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
-            @("}")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{
+            "<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>",
+            })"/>
+        <DisplayCode Language="CSharp" 
+            Code="@(new[]{
+            "@functions {",
+            "bool ParentValue;",
+            "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+            "}",
+        })"/>
     </div>
 </div>
 

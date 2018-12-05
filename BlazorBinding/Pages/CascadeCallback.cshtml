@@ -12,9 +12,7 @@
             <input id="parent" type="checkbox" bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
-@ClearSamples()
-        @AddCodeSample(1,"<input id='parent' type='checkbox' bind='@ParentValue' />")
-        <DisplayCode Language="HTML" Code=@CodeSample[1]/>
+        <DisplayCode Code="@(new[]{ "<input id='parent' type='checkbox' bind='@ParentValue' />"})"/>
     </div>
 </div>
 
@@ -29,26 +27,26 @@
             </CascadingValue>
             <!-- /Child Level Checkbox -->
         </div>
-        @AddCodeSample(2, "<CascadingValue Name=\"ParentValue\" Value=\"@ParentValue\">")
-        @AddCodeSample(2, "   <CheckBox2 Callback=\"UpdateValue\"/>")
-        @AddCodeSample(2, "</CascadingValue>")
-        <DisplayCode Language="html" Code=@CodeSample[2] />
-
+        <DisplayCode Code="@(new []{
+            "<CascadingValue Name=\"ParentValue\" Value=\"@ParentValue\">",
+            "   <CheckBox2 Callback=\"UpdateValue\"/>",
+            "</CascadingValue>",
+            })"/>
         <p class="card-text">
             The CheckBox2 implementation :
         </p>
         <p class="card-text">
             Here we bind to a local proxy value so we can fire the Callback when the local value changes
         </p>
-        @AddCodeSample(3, "<input type='checkbox' bind='@Value' />")
-        @AddCodeSample(4, "@functions")
-        @AddCodeSample(4, "{")
-        @AddCodeSample(4, " [Parameter] protected Action<bool> Callback { get; set; }")
-        @AddCodeSample(4, " [CascadingParameter(Name =\"ParentValue\")] bool ParentValue { get; set; }")
-        @AddCodeSample(4, " bool Value { get { return ParentValue; } set { Callback?.Invoke(value); } }")
-        @AddCodeSample(4, "}")
-        <DisplayCode Language="html" Code="@CodeSample[3]" />
-        <DisplayCode Language="csharp" Code="@CodeSample[4]" />
+        <DisplayCode Code="@(new[] {"<input type='checkbox' bind='@Value' />"})" />
+        <DisplayCode Language="CSharp" 
+            Code="@(new[]{"@functions",
+            "{" ,
+            " [Parameter] protected Action<bool> Callback { get; set; }" ,
+            " [CascadingParameter(Name =\" ParentValue\")] bool ParentValue { get; set; }",
+            " bool Value { get { return ParentValue; } set { Callback?.Invoke(value); } }" ,
+            "}" ,
+            })" />
     </div>
 </div>
 <div class="card">
@@ -68,19 +66,18 @@
                 Callback has already updated this parent page.
             </p>
         </div>
-        @AddCodeSample(5, "<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
-        <DisplayCode Language="html" Code="@CodeSample[5]" />
+        <DisplayCode Code="@(new[] {"<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>"})"/>
         <p class="card-text">
             Page implementation:
         </p>
-        @AddCodeSample(6, "@functions")
-        @AddCodeSample(6, "{")
-        @AddCodeSample(6, " bool ParentValue;")
-        @AddCodeSample(6, " void Refresh(UIMouseEventArgs args) => StateHasChanged();")
-        @AddCodeSample(6, " void UpdateValue(bool value) { ParentValue = value; Refresh(null); }")
-        @AddCodeSample(6, "}")
-
-        <DisplayCode Language="csharp" Code="@CodeSample[6]" />
+        <DisplayCode Language="CSharp" Code="@(new[]{
+            "@functions",
+            "{",
+            " bool ParentValue;",
+            " void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+            " void UpdateValue(bool value) { ParentValue = value; Refresh(null); }",
+            "}",
+            })" />
     </div>
 </div>
 
