@@ -1,5 +1,8 @@
 ﻿# DisplayCode enhancement
 
+*Update: 5th Dec 2018*
+*Much of this has now been replaced by the new DisplayCode component which does not use JSInterop*
+
 When I saw SQL Mister Magoo's excellent BlazorBinding project I thought it would be an
 interesting experiment to try to add Code Syntax Highlighting to his `<DisplayCode>` component.
 
