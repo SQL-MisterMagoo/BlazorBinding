@@ -45,38 +45,7 @@ namespace BlazorBinding.Pages
 
 		internal string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
 
-		internal Dictionary<int,string> CodeSample = new Dictionary<int, string>();
 		internal List<string> EventList = new List<string>();
-
-		internal string ClearSamples()
-		{
-			CodeSample.Clear();
-			return string.Empty;
-		}
-
-		internal MarkupString AddCode(int id, string code)
-		{
-			AddOrUpdateCode(id, code);
-			return (MarkupString)code;
-		}
-
-		internal string AddCodeSample(int id, string code)
-		{
-			AddOrUpdateCode(id, code);
-			return string.Empty;
-		}
-
-		private void AddOrUpdateCode(int id, string code)
-		{
-			if (CodeSample.ContainsKey(id))
-			{
-				CodeSample[id] += $"\n{code}";
-			}
-			else
-			{
-				CodeSample[id] = code;
-			}
-		}
 
 		internal MarkupString GetEvents()
 		{
