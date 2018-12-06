@@ -22,12 +22,28 @@
         <div class="card">
             <h6 class="card-header">5th December 2018</h6>
             <div class="card-body">
-                <p class="card-text">Now using a new DisplayCode component that is simpler and highlights syntax</p>
-                <p class="card-text">The syntax highlighting is implemented using <a href="https://github.com/SQL-MisterMagoo/highlight">my dotnetstandard fork</a> of the project <a href="https://github.com/thomasjo/highlight">highlight by thomasjo</a></p>
+                <p class="card-text">Style update from <a href="https://github.com/conficient">Howard Richards</a>, including the ColorCode reference.</p>
+                <p class="card-text">The syntax highlighting is implemented using <a href="https://github.com/WilliamABradley/ColorCode-Universal">ColorCode</a></p>
                 <div class="form-group callout-child">
                     <DisplayCode Code="@(new[] {
                 "<DisplayCode Code=\"@(new[] {\"<input id=\"parent\" type=\"checkbox\" bind=\"@ParentValue\" />\"})\" />",
                 })" />
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <h6 class="card-header">5th December 2018</h6>
+            <div class="card-body">
+                <p class="card-text">Now using a new DisplayCode component that is simpler and highlights syntax</p>
+                <p class="card-text">The syntax highlighting was implemented using <a href="https://github.com/SQL-MisterMagoo/highlight">my dotnetstandard fork</a> of the project <a href="https://github.com/thomasjo/highlight">highlight by thomasjo</a></p>
+                <div class="form-group callout-child">
+                    <DisplayCode Code="@(new[] {
+                        "<DisplayCode Code=\"@(new[]{",
+                            "   \"<CascadingValue Name=\"ParentValue\" Value=\"@ParentValue\">\",",
+                            "   \" <CheckBox />\",",
+                            "   \"</CascadingValue>\",",
+                            "    })\"/>",
+                    })" />
                 </div>
             </div>
         </div>
