@@ -1,0 +1,26 @@
+[
+  {
+    "dated": "2018-12-09",
+    "content": "Migrate to dotnetcore 3.0.100-preview-009812 and Razor Components/Blazor 0.8.0-preview1-20181122.3"
+  },
+  {
+    "dated": "2018-12-06",
+    "content": "Add page showing the problem with click propagation"
+  },
+  {
+    "dated": "2018-12-05",
+    "content": "Style update from <a href=\"https://github.com/conficient\">Howard Richards</a>, including the ColorCode reference."
+  },
+  {
+    "dated": "2018-12-05",
+    "content": "Now using a new DisplayCode component that is simpler and highlights syntax"
+  },
+  {
+    "dated": "2018-11-27",
+    "content": "Style update from <a href=\"https://www.twitch.tv/edcharbeneau\">Ed Charbeneau</a>, including these cards",
+    "child": [
+      { "text": "Watch Ed's show #StateHasChanged on Twitch" },
+      { "text": "<a href=\"https://www.twitch.tv/edcharbeneau\">#StateHasChanged</a>" }
+    ]
+  }
+]

@@ -1,5 +1,5 @@
 ﻿@page "/"
-
+@using BlazorBinding.Components.DocumentationSupport
 
 <div class="card">
     <h1 class="card-header">Data Binding Examples</h1>
@@ -16,58 +16,49 @@
     </div>
 </div>
 
-<div class="card">
-    <h5 class="card-header">Changelog</h5>
-    <div class="card-body">
+
+@if (ChangeLogItems != null)
+{
+    @foreach (var item in ChangeLogItems)
+    {
         <div class="card">
-            <h6 class="card-header">9th December 2018</h6>
+            <h5 class="card-header">@item.dated.ToLongDateString()</h5>
             <div class="card-body">
-                <p class="card-text">Migrate to dotnetcore 3.0.100-preview-009812 and Razor Components / Blazor 0.8.0-preview1-20181122.3</p>
+                <p class="card-text">@((MarkupString)item.content)</p>
+                @if (item.child != null)
+                {
+                    foreach (var child in item.child)
+                    {
+                        <div class="form-group callout-child">
+                            @((MarkupString)child.text)
+                    </div>
+                }
+            }
             </div>
         </div>
-        <div class="card">
-            <h6 class="card-header">6th December 2018</h6>
-            <div class="card-body">
-                <p class="card-text">Add page showing the problem with click propagation</p>
-            </div>
-        </div>
-        <div class="card">
-            <h6 class="card-header">5th December 2018</h6>
-            <div class="card-body">
-                <p class="card-text">Style update from <a href="https://github.com/conficient">Howard Richards</a>, including the ColorCode reference.</p>
-                <p class="card-text">The syntax highlighting is implemented using <a href="https://github.com/WilliamABradley/ColorCode-Universal">ColorCode</a></p>
-                <div class="form-group callout-child">
-                    <DisplayCode Code="@(new[] {
-                "<DisplayCode Code=\"@(new[] {\"<input id=\"parent\" type=\"checkbox\" bind=\"@ParentValue\" />\"})\" />",
-                })" />
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <h6 class="card-header">5th December 2018</h6>
-            <div class="card-body">
-                <p class="card-text">Now using a new DisplayCode component that is simpler and highlights syntax</p>
-                <p class="card-text">The syntax highlighting was implemented using <a href="https://github.com/SQL-MisterMagoo/highlight">my dotnetstandard fork</a> of the project <a href="https://github.com/thomasjo/highlight">highlight by thomasjo</a></p>
-                <div class="form-group callout-child">
-                    <DisplayCode Code="@(new[] {
-                        "<DisplayCode Code=\"@(new[]{",
-                            "   \"<CascadingValue Name=\"ParentValue\" Value=\"@ParentValue\">\",",
-                            "   \" <CheckBox />\",",
-                            "   \"</CascadingValue>\",",
-                            "    })\"/>",
-                    })" />
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <h6 class="card-header">27th November 2018</h6>
-            <div class="card-body">
-                <p class="card-text">Style update from <a href="https://www.twitch.tv/edcharbeneau">Ed Charbeneau</a>, including these cards</p>
-                <div class="form-group callout-child">
-                    Watch Ed's show #StateHasChanged on Twitch
-                    <a href="https://www.twitch.tv/edcharbeneau">#StateHasChanged</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    }
+}
+
+@functions
+{
+  //
+  [Inject] HttpClient httpClient { get; set; }
+  ChangeLog[] ChangeLogItems;
+
+  protected async override Task OnInitAsync()
+  {
+      await base.OnInitAsync();
+      try
+      {
+          var changeLogItems = await httpClient.GetStringAsync("data/changelog.json");
+          ChangeLogItems = Json.Deserialize<ChangeLog[]>(changeLogItems) ;
+          Console.WriteLine($"Got {ChangeLogItems} ChangeLogItems");
+      }
+      catch (Exception e)
+      {
+          Console.WriteLine($"ERROR: {e.GetBaseException().Message}");
+      }
+  }
+
+  //
+}

@@ -1,0 +1,20 @@
+﻿@page "/readme"
+<article>
+    @Contents
+</article>
+
+@functions
+{
+//
+[Inject] HttpClient httpClient { get; set; }
+MarkupString Contents;
+
+protected async override Task OnInitAsync()
+{
+    await base.OnInitAsync();
+    var stream = await httpClient.GetStringAsync("data/README.md");
+    Contents = (MarkupString)Markdig.Markdown.ToHtml(stream);
+}
+
+//
+}
