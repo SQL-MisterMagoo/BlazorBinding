@@ -26,6 +26,9 @@ Demonstrates how you can ensure the parent knows a child component has updated d
 ## The Problem With Clicks - "Propagation"
 Demonstrates how events on standard html elements propagate in Blazor. This is very bad.
 
+## Using CascadingValue To Share A Global Component - Dialog
+Demonstrates how to use CascadingValue to share a component from MainLayout so that it is globally accessible.
+
 ### Summary
 
 In all cases, some kind of callback action is required to notify the parent component of a change in the data.

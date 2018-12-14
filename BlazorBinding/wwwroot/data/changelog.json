@@ -1,7 +1,11 @@
 [
   {
+    "dated": "2018-12-14",
+    "content": "Add global dialog sample"
+  },
+  {
     "dated": "2018-12-09",
-    "content": "Migrate to dotnetcore 3.0.100-preview-009812 and Razor Components/Blazor 0.8.0-preview1-20181122.3"
+    "content": "Migrate to Razor Components/Blazor 0.8.0-preview1-20181122.3"
   },
   {
     "dated": "2018-12-06",

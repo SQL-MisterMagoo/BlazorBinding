@@ -1,4 +1,7 @@
 ﻿@page "/sb"
+@using BlazorBinding.Components.DocumentationSupport
+@inherits ComponentBase
+
 <h2>Simple Binding Value - "One Way Binding"</h2>
 <div class="card">
     <h5 class="card-header">This is the parent control</h5>
@@ -65,15 +68,13 @@
             "bool ParentValue;",
             "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
             "}",
-            })" />
+            })"/>
     </div>
 </div>
 
 @functions
 {
-
-    bool ParentValue;
-    void Refresh(UIMouseEventArgs args) => StateHasChanged();
-    string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
-
+  bool ParentValue;
+  void Refresh(UIMouseEventArgs args) => StateHasChanged();
+  string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
 }

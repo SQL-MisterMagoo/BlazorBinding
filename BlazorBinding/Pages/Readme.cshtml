@@ -12,8 +12,54 @@ MarkupString Contents;
 protected async override Task OnInitAsync()
 {
     await base.OnInitAsync();
-    var stream = await httpClient.GetStringAsync("data/README.md");
-    Contents = (MarkupString)Markdig.Markdown.ToHtml(stream);
+    try
+    {
+        var stream = await httpClient.GetStringAsync("data/README.md");
+        Contents = (MarkupString)Markdig.Markdown.ToHtml(stream);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Failed to load README.md");
+        Console.WriteLine(ex.GetBaseException().Message);
+        Contents = (MarkupString)Markdig.Markdown.ToHtml("# BlazorBinding\n" +
+            "Sample Blazor App demonstrating various data binding scenarios\n" +
+            "\n" +
+            "## Simple Cascade\n" +
+            "Demonstrates how CascadingValue is a one-way data transfer, which updates the subscriber but not the publisher.\n" +
+            "\n" +
+            "## Cascade With Callback\n" +
+            "Demonstrates how you can add a Callback Action to update the CascadingValue from subscriber to publisher.\n" +
+            "\n" +
+            "## Simple Binding\n" +
+            "Demonstrates the use of parameter binding, which is a one-way binding like the CascadingValue, but specific to the bound Component.\n" +
+            "\n" +
+            "## Simple Binding With Callback\n" +
+            "Demonstrates how you can add a Callback Action to update the parent values from the child.\n" +
+            "\n" +
+            "## Value Binding\n" +
+            "Demonstrates how the bind-Value syntax works in a one-way mode, like simple binding.\n" +
+            "*This is considered to be a bug by many*\n" +
+            "\n" +
+            "## Value Binding With Callback\n" +
+            "Demonstrates how you can update the parent from a child component by invoking the _required_ ValueChanged Action.\n" +
+            "\n" +
+            "## Value Binding With Callback + Refresh\n" +
+            "Demonstrates how you can ensure the parent knows a child component has updated data, and trigger a refresh.\n" +
+            "\n" +
+            "## The Problem With Clicks - \"Propagation\"\n" +
+            "Demonstrates how events on standard html elements propagate in Blazor. This is very bad.\n" +
+            "\n" +
+            "## Using CascadingValue To Share A Global Component - Dialog\n" +
+            "Demonstrates how to use CascadingValue to share a component from MainLayout so that it is globally accessible.\n" +
+            "\n" +
+            "### Summary\n" +
+            "\n" +
+            "In all cases, some kind of callback action is required to notify the parent component of a change in the data.\n" +
+            "This is, in my opinion OK - as it gives me control of the data and UI - however, some people consider the manual intervention required to be a bug.\n" +
+            "\n" +
+            "I have not included any examples of using \"State\" to achieve two way binding, although that is also possible, it would also require some kind of callback notification.\n" +
+            "");
+    }
 }
 
 //
