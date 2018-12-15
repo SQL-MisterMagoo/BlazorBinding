@@ -35,6 +35,10 @@
             }
         </div>
         <button class="btn btn-primary" onclick="@Clicked">Show Dialog</button>
+        @if (!string.IsNullOrWhiteSpace(Message))
+        {
+          <p>@Message</p>
+        }
 
         <DisplayCode Language="CSharp" Code="@(new[]{
             "void Clicked(UIMouseEventArgs args)      ",
@@ -55,44 +59,76 @@
             "if (!string.IsNullOrWhiteSpace(BtnSec) || HideSec)",
             "    global.MMDialogRef.SetBtnSecText(BtnSec);",
             "                                           ",
+            "global.MMDialogRef.SetBtnPriCallback(BtnPriCallback);",
+            "global.MMDialogRef.SetBtnSecCallback(BtnSecCallback);",
+            "                                           ",
             "  global.MMDialogRef.Show();               ",
             "}                                          ",
+            "protected void BtnPriCallback(UIMouseEventArgs args)",
+            "{",
+            "    Message = $\"User clicked dialog button 1 - {BtnPri}\";",
+            "    global?.MMDialogRef?.Hide();",
+            "    StateHasChanged();",
+            "}",
+            "protected void BtnSecCallback(UIMouseEventArgs args)",
+            "{",
+            "    Message = $\"User clicked dialog button 2 - {BtnSec}\";",
+            "    global?.MMDialogRef?.Hide();",
+            "    StateHasChanged();",
+            "}",
         })" />
     </div>
 </div>
 
 @functions
 {
-[CascadingParameter(Name = "Global")] MainLayout global { get; set; }
+  [CascadingParameter(Name = "Global")] MainLayout global { get; set; }
 
-string Title;
-string Body;
-string BtnPri; bool HidePri;
-string BtnSec; bool HideSec;
+  string Title;
+  string Body;
+  string BtnPri; bool HidePri;
+  string BtnSec; bool HideSec;
+  string Message;
 
-void Clicked(UIMouseEventArgs args)
-{
-    if (global == null)
-    {
-        Console.WriteLine($"CLICKED No Dialog");
-        return;
-    }
-    if (!string.IsNullOrWhiteSpace(Title))
-        global.MMDialogRef.SetTitle(Title);
+  void Clicked(UIMouseEventArgs args)
+  {
+      if (global == null)
+      {
+          Console.WriteLine($"CLICKED No Dialog");
+          return;
+      }
+      if (!string.IsNullOrWhiteSpace(Title))
+          global.MMDialogRef.SetTitle(Title);
 
-    if (!string.IsNullOrWhiteSpace(Body))
-        global.MMDialogRef.SetBody(Body);
+      if (!string.IsNullOrWhiteSpace(Body))
+          global.MMDialogRef.SetBody(Body);
 
-    if (!string.IsNullOrWhiteSpace(BtnPri) || HidePri)
-        global.MMDialogRef.SetBtnPriText(BtnPri);
+      if (!string.IsNullOrWhiteSpace(BtnPri) || HidePri)
+          global.MMDialogRef.SetBtnPriText(BtnPri);
 
-    if (!string.IsNullOrWhiteSpace(BtnSec) || HideSec)
-        global.MMDialogRef.SetBtnSecText(BtnSec);
+      if (!string.IsNullOrWhiteSpace(BtnSec) || HideSec)
+          global.MMDialogRef.SetBtnSecText(BtnSec);
 
-    global.MMDialogRef.Show();
-    Console.WriteLine($"TITLE: {Title}");
-    Console.WriteLine($"BODY : {Body}");
-    Console.WriteLine($"BTN 1: {BtnPri}");
-    Console.WriteLine($"BTN 2: {BtnSec}");
-}
+      global.MMDialogRef.SetBtnPriCallback(BtnPriCallback);
+      global.MMDialogRef.SetBtnSecCallback(BtnSecCallback);
+
+      global.MMDialogRef.Show();
+      Console.WriteLine($"TITLE: {Title}");
+      Console.WriteLine($"BODY : {Body}");
+      Console.WriteLine($"BTN 1: {BtnPri}");
+      Console.WriteLine($"BTN 2: {BtnSec}");
+  }
+  protected void BtnPriCallback(UIMouseEventArgs args)
+  {
+      Message = $"User clicked dialog button 1 - {BtnPri}";
+      global?.MMDialogRef?.Hide();
+      StateHasChanged();
+  }
+  protected void BtnSecCallback(UIMouseEventArgs args)
+  {
+      Message = $"User clicked dialog button 2 - {BtnSec}";
+      global?.MMDialogRef?.Hide();
+      StateHasChanged();
+  }
+
 }

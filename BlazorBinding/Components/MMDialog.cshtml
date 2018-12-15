@@ -67,6 +67,7 @@
   string BtnPriText;
   string BtnSecText;
 
+  #region "Public Actions"
   public void Show()
   {
       Classes = "modal fade show";
@@ -80,6 +81,9 @@
       Styles = "display: none;";
       StateHasChanged();
   }
+  #endregion
+
+  #region "Internal Actions"
   protected void BtnPriClickInternal(UIMouseEventArgs args)
   {
       if (BtnPriClick == null)
@@ -111,6 +115,9 @@
       Console.WriteLine("Close Button");
       Hide();
   }
+  #endregion
+
+  #region "Public Setters"
   public void SetTitle(string Title)
   {
       Console.WriteLine($"New Title: {Title}");
@@ -131,6 +138,16 @@
       Console.WriteLine($"New Sec: {Btn}");
       BtnSecText = Btn;
   }
+  public void SetBtnPriCallback(Action<UIMouseEventArgs> Callback)
+  {
+      BtnPriClick = Callback;
+  }
+  public void SetBtnSecCallback(Action<UIMouseEventArgs> Callback)
+  {
+      BtnSecClick = Callback;
+  }
+  #endregion
+
   protected override void OnInit()
   {
       if (TitleContent == null && TitleText == null) SetTitle("Information");

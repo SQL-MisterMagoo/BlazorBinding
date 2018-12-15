@@ -1,5 +1,9 @@
 [
   {
+    "dated": "2018-12-15",
+    "content": "Add dialog button callbacks to the global dialog sample"
+  },
+  {
     "dated": "2018-12-14",
     "content": "Add global dialog sample"
   },
