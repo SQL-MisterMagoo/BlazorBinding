@@ -2,39 +2,47 @@
 @using Microsoft.AspNetCore.Components.Browser
 @inject ICodeHighlighter CodeHighlighter
 
-<div class="code-highlight-wrap">
-    <a class="btn-sm btn btn-light" onclick="@ToggleCode">@ToggleText code</a>
-    <div class="code-highlight" style="@ToggleCss">
+<div class="code-highlight-wrap mt-1">
+    <a class="btn btn-sm btn-outline-info" onclick="@ToggleCode">@ToggleText code</a>
+@if (displayCode)
+{
+    <div class="code-highlight">
         @CodeMarkup
     </div>
+}
 </div>
 
 @functions {
-bool displayCode = false;
-[Parameter] protected string Language { get; set; } = "HTML";
-[Parameter] protected string[] Code { get; set; }
+  bool displayCode = false;
+  [Parameter] protected string Language { get; set; } = "HTML";
+  [Parameter] protected string[] Code { get; set; }
+  MarkupString cache;
+  private MarkupString CodeMarkup
+  {
+      get
+      {
+          if (!string.IsNullOrWhiteSpace(cache.Value))
+              return cache;
 
-private MarkupString CodeMarkup
-{
-    get
-    {
-        switch (Language.ToUpper())
-        {
-            case "HTML":
-                return (MarkupString)CodeHighlighter.HighlightHtml(string.Join("\n", Code));
-            case "CSHARP":
-                return (MarkupString)CodeHighlighter.HighlightCSharp(string.Join("\n", Code));
-        }
-        return (MarkupString)string.Join("\n", Code);
-    }
-}
+          switch (Language.ToUpper())
+          {
+              case "HTML":
+                  cache = (MarkupString)CodeHighlighter.HighlightHtml(string.Join("\n", Code));
+                  return cache;
+              case "CSHARP":
+                  cache = (MarkupString)CodeHighlighter.HighlightCSharp(string.Join("\n", Code));
+                  return cache;
+          }
+          cache = (MarkupString)string.Join("\n", Code);
+          return cache;
+      }
+  }
 
-string ToggleCss => displayCode ? "display:block" : "display:none";
-string ToggleText => displayCode ? "hide" : "show";
-void ToggleCode()
-{
-    displayCode = !displayCode;
-    StateHasChanged();
-}
+  string ToggleText => displayCode ? "hide" : "show";
+  void ToggleCode()
+  {
+      displayCode = !displayCode;
+      StateHasChanged();
+  }
 
 }
