@@ -50,6 +50,5 @@ void DeleteItem(TList item)
     ListData.Remove(item);
     ChangeAction?.Invoke(item, "Deleted");
     StateHasChanged();
-
 }
 }
