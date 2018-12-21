@@ -23,6 +23,9 @@ Demonstrates how you can update the parent from a child component by invoking th
 ## Value Binding With Callback + Refresh
 Demonstrates how you can ensure the parent knows a child component has updated data, and trigger a refresh.
 
+## Value Binding Class Object
+Demonstrates how to two-way bind a list of objects with multiple properties.
+
 ## The Problem With Clicks - "Propagation"
 Demonstrates how events on standard html elements propagate in Blazor. This is very bad.
 

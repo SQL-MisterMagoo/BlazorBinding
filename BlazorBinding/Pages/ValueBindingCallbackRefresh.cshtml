@@ -1,4 +1,6 @@
 ﻿@page "/vbcr"
+@inherits ComponentBase
+
 <h2>Value Binding With Callback - "Two Way Value Binding - With Refresh"</h2>
 
 <div class="card">
@@ -53,7 +55,7 @@
                 </div>
             </div>
             <div class="col-sm-8">
-                <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+                <button id="refresh" onclick=@Refresh class="btn btn-standard">Refresh</button>
             </div>
         </div>
         <p class="card-text">
@@ -77,9 +79,9 @@
 @functions
 {
 
-    bool localParentValue;
-    bool ParentValue { get { return localParentValue; } set { localParentValue = value; Refresh(null); } }
-    void Refresh(UIMouseEventArgs args) => StateHasChanged();
-    string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
+  bool localParentValue;
+  bool ParentValue { get { return localParentValue; } set { localParentValue = value; Refresh(null); } }
+  protected void Refresh(UIMouseEventArgs args) { StateHasChanged(); }
+  string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
 
 }
