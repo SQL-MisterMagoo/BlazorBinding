@@ -14,7 +14,7 @@ protected async override Task OnInitAsync()
     await base.OnInitAsync();
     try
     {
-        var stream = await httpClient.GetStringAsync("data/README.md");
+        var stream = await httpClient.GetStringAsync("https://raw.githubusercontent.com/SQL-MisterMagoo/BlazorBinding/master/README.md");
         Contents = (MarkupString)Markdig.Markdown.ToHtml(stream);
     }
     catch (Exception ex)
