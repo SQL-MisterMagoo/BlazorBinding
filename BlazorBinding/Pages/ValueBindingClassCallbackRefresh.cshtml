@@ -1,5 +1,5 @@
 ﻿@page "/vbccr"
-@inherits ComponentBase
+@inherits BlazorComponent
 
 <h2>Value Binding a Class object With Callback - "Two Way Class Binding - With Refresh"</h2>
 
@@ -93,7 +93,7 @@
             })"/>
         <p class="card-text">The ListView implementation : </p>
         <DisplayCode Code="@(new[]{
-            "@inherits ComponentBase",
+            "@inherits BlazorComponent",
             "@typeparam TList",
             "",
             "@if (ListData == null)",

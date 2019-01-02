@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Blazor;
+using Microsoft.AspNetCore.Blazor.Components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BlazorBinding.Pages
 {
-	
-	public class CascadeCallbackModel : ComponentBase
+
+	public class CascadeCallbackModel : BlazorComponent
 	{
 		private bool _parentValue;
 		internal bool ParentValue

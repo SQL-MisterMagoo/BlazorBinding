@@ -1,5 +1,5 @@
 using BlazorBinding.Services;
-using Microsoft.AspNetCore.Components.Builder;
+using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorBinding
