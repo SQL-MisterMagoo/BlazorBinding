@@ -15,7 +15,7 @@
 
 @functions
 {
-List<string> values = A.ListOf<Person>(1000).Select(p => p.FirstName).Distinct().ToList();
+List<string> values = A.ListOf<Person>(300).Select(p => p.FirstName).Distinct().ToList();
 class Person
 {
     public string FirstName { get; set; }
