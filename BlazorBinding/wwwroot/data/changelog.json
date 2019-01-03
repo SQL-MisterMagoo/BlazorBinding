@@ -1,5 +1,13 @@
 [
   {
+    "dated": "2019-01-03",
+    "content": "Add Autocomplete text input sample",
+    "child": [
+      { "text": "This demonstrates how to perform autocomplete on a text input." }
+    ]
+  },
+
+  {
     "dated": "2018-12-21",
     "content": "Add Value Binding Class Object sample",
     "child": [

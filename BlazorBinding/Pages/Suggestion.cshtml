@@ -1,24 +1,56 @@
 ﻿@page "/sugg"
 @using GenFu
-<span>There are @values?.Count names.</span>
-<AutoComplete AllowedValues="@values">
-    <ListItemContent>
-        <span>@context</span>
-    </ListItemContent>
-</AutoComplete>
+@if (values == null)
+{
+    <span>Loading random list of names for the auto-complete list.</span>
+}
+else
+{
+    <span>There are @values?.Count names in the auto-complete list.</span>
+}
 
 <AutoComplete AllowedValues="@values">
     <ListItemContent>
         <span>@context</span>
     </ListItemContent>
 </AutoComplete>
+
+<span>Page Code </span><DisplayCode Language="CSharp" Code="@PageContents" />
 
 @functions
 {
-List<string> values = A.ListOf<Person>(300).Select(p => p.FirstName).Distinct().ToList();
+[Inject] HttpClient httpClient { get; set; }
+
+string[] PageContents;
+List<string> values;
+
+protected override async Task OnParametersSetAsync()
+{
+    await base.OnParametersSetAsync();
+    Task.Factory.StartNew(LoadData);
+    Task.Factory.StartNew(async () =>
+    {
+        try
+        {
+            var stream = await httpClient.GetStringAsync("https://raw.githubusercontent.com/SQL-MisterMagoo/BlazorBinding/master/Pages/Suggestion.cshtml");
+            PageContents = stream.Split(Environment.NewLine.ToCharArray());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Failed to load README.md");
+            Console.WriteLine(ex.GetBaseException().Message);
+        }
+    });
+}
+void LoadData()
+{
+    values = A.ListOf<Person>(1000).Select(p => $"{p.FirstName} {p.LastName}").Distinct().ToList();
+    StateHasChanged();
+}
 class Person
 {
     public string FirstName { get; set; }
+    public string LastName { get; set; }
     public Person()
     {
 
