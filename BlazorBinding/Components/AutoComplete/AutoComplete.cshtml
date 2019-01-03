@@ -142,12 +142,13 @@
       {
           try
           {
-              var stream = await httpClient.GetStringAsync("https://raw.githubusercontent.com/SQL-MisterMagoo/BlazorBinding/master/Components/AutoComplete/AutoComplete.cshtml");
+              var stream = await httpClient.GetStringAsync("https://raw.githubusercontent.com/SQL-MisterMagoo/BlazorBinding/master/BlazorBinding/Components/AutoComplete/AutoComplete.cshtml");
               PageContents = stream.Split(Environment.NewLine.ToCharArray());
+              StateHasChanged();
           }
           catch (Exception ex)
           {
-              Console.WriteLine("Failed to load README.md");
+              Console.WriteLine("Failed to load AutoComplete.cshtml");
               Console.WriteLine(ex.GetBaseException().Message);
           }
       });

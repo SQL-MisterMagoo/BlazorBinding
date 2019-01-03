@@ -28,24 +28,26 @@ protected override async Task OnParametersSetAsync()
 {
     await base.OnParametersSetAsync();
     Task.Factory.StartNew(LoadData);
-    Task.Factory.StartNew(async () =>
-    {
-        try
-        {
-            var stream = await httpClient.GetStringAsync("https://raw.githubusercontent.com/SQL-MisterMagoo/BlazorBinding/master/Pages/Suggestion.cshtml");
-            PageContents = stream.Split(Environment.NewLine.ToCharArray());
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Failed to load README.md");
-            Console.WriteLine(ex.GetBaseException().Message);
-        }
-    });
 }
 void LoadData()
 {
-    values = A.ListOf<Person>(1000).Select(p => $"{p.FirstName} {p.LastName}").Distinct().ToList();
+    values = A.ListOf<Person>(200).Select(p => $"{p.FirstName} {p.LastName}").Distinct().ToList();
+    Task.Factory.StartNew(async () => await LoadCode());
     StateHasChanged();
+}
+async Task LoadCode()
+{
+    try
+    {
+        var stream = await httpClient.GetStringAsync("https://raw.githubusercontent.com/SQL-MisterMagoo/BlazorBinding/master/BlazorBinding/Pages/Suggestion.cshtml");
+        PageContents = stream.Split(Environment.NewLine.ToCharArray());
+        StateHasChanged();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Failed to load Suggestion.cshtml");
+        Console.WriteLine(ex.GetBaseException().Message);
+    }
 }
 class Person
 {
