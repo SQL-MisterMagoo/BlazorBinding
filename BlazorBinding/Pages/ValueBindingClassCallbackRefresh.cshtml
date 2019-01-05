@@ -89,7 +89,7 @@
             "        <h6>@context.Name @($\"@{context.NickName}\")</h6>",
             "    </ListItemContent>",
             "</ListView>",
-            })"/>
+            })" />
         <p class="card-text">The ListView implementation : </p>
         <DisplayCode Code="@(new[]{
             "@inherits BlazorComponent",
@@ -115,9 +115,9 @@
             "        </div>",
             "    }",
             "}",
-            })"/>
-        <DisplayCode Language="CSharp" 
-            Code="@(new[]{
+            })" />
+        <DisplayCode Language="CSharp"
+                     Code="@(new[]{
             "@functions {",
             "  TList activeItem;",
             "",
@@ -147,31 +147,14 @@
             "      StateHasChanged();",
             "  }",
             "}",
-            })"/>
+            })" />
     </div>
 </div>
-<div class="card">
-    <h5 class="card-header">Invoking StateHasChanged</h5>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="alert alert-info">
-                    <span class="@StateHasChangedCss">Last refresh @DateTime.Now</span>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
-            </div>
-        </div>
-        <p class="card-text">
-            Now click the button to refresh this page - Nothing will change except the Last Refresh time, <br />
-            because <b>we are propogating the value change from child to parent and raising a Refresh</b>
-        </p>
-        <p class="card-text">
-            Page implementation:
-        </p>
-        <DisplayCode Language="CSharp"
-            Code="@(new[]{
+<p>
+    Page implementation:
+</p>
+<DisplayCode Language="CSharp"
+             Code="@(new[]{
             "@functions {",
             "  string LastChange;",
             "  string AddingNewUser = \"d-none\";",
@@ -216,56 +199,54 @@
             "  }",
             "}",
             })" />
-    </div>
-</div>
 
 @functions
 {
-    bool PingState;
+bool PingState;
 
-    void Refresh(UIMouseEventArgs args) => StateHasChanged();
+void Refresh(UIMouseEventArgs args) => StateHasChanged();
 
-    string StateHasChangedCss => PingState ? "ping-on" : "ping-off";
+string StateHasChangedCss => PingState ? "ping-on" : "ping-off";
 
-    string LastChange;
-    string AddingNewUser = "d-none";
-    string localName = "";
-    string localNick = "";
-    static List<SampleUserData> data = new List<SampleUserData>() { new SampleUserData("Test1", "TimmyTester") };
+string LastChange;
+string AddingNewUser = "d-none";
+string localName = "";
+string localNick = "";
+static List<SampleUserData> data = new List<SampleUserData>() { new SampleUserData("Test1", "TimmyTester") };
 
-    void ListItemChanged(ISampleData item,string action)
-    {
-        LastChange = $"User {item.Name} was {action} at {DateTime.Now}";
-        PingState = !PingState;
-        StateHasChanged();
-    }
+void ListItemChanged(ISampleData item, string action)
+{
+    LastChange = $"User {item.Name} was {action} at {DateTime.Now}";
+    PingState = !PingState;
+    StateHasChanged();
+}
 
-    void AddNewUser(UIMouseEventArgs args)
-    {
-        AddingNewUser = "";
-        PingState = !PingState;
-        StateHasChanged();
-    }
-    void AddNewUserConfirm(UIMouseEventArgs args)
-    {
-        if (string.IsNullOrWhiteSpace(localName) ||
-            string.IsNullOrWhiteSpace(localNick) ||
-            data.Any(x => x.NickName.Equals(localNick, StringComparison.InvariantCultureIgnoreCase)))
-            return;
+void AddNewUser(UIMouseEventArgs args)
+{
+    AddingNewUser = "";
+    PingState = !PingState;
+    StateHasChanged();
+}
+void AddNewUserConfirm(UIMouseEventArgs args)
+{
+    if (string.IsNullOrWhiteSpace(localName) ||
+        string.IsNullOrWhiteSpace(localNick) ||
+        data.Any(x => x.NickName.Equals(localNick, StringComparison.InvariantCultureIgnoreCase)))
+        return;
 
-        var newUser = new SampleUserData(localName, localNick);
-        localName = "";
-        localNick = "";
+    var newUser = new SampleUserData(localName, localNick);
+    localName = "";
+    localNick = "";
 
-        data.Add(newUser);
-        ListItemChanged(newUser, "Added");
-        AddingNewUser = "d-none";
-        StateHasChanged();
-    }
-    void AddNewUserCancel(UIMouseEventArgs args)
-    {
-        AddingNewUser = "d-none";
-        PingState = !PingState;
-        StateHasChanged();
-    }
+    data.Add(newUser);
+    ListItemChanged(newUser, "Added");
+    AddingNewUser = "d-none";
+    StateHasChanged();
+}
+void AddNewUserCancel(UIMouseEventArgs args)
+{
+    AddingNewUser = "d-none";
+    PingState = !PingState;
+    StateHasChanged();
+}
 }

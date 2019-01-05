@@ -60,23 +60,23 @@
             </div>
         </div>
         <p class="card-text">
-            Page implementation:
-        </p>
-        <p class="card-text">
             Now click the button to refresh this page - nothing will change except the Last Refresh time, because the CascadingValue is a one-way binding
         </p>
         <DisplayCode Code="@(new[]{
             "<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>",
             })"/>
-        <DisplayCode Language="CSharp" 
-            Code="@(new[]{
-            "@functions {",
-            "bool ParentValue;",
-            "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
-            "}",
-        })"/>
     </div>
 </div>
+<p>
+    Page implementation:
+</p>
+<DisplayCode Language="CSharp" 
+    Code="@(new[]{
+    "@functions {",
+    "bool ParentValue;",
+    "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+    "}",
+})"/>
 
 @functions
 {

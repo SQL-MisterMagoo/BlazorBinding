@@ -35,6 +35,9 @@ Demonstrates how to use CascadingValue to share a component from MainLayout so t
 ## Autocomplete text input
 Demonstrates how to perform autocomplete on a text input.
 
+## ViewModel Binding
+Demonstrates a simple method to enable a page to bind a ViewModel that automatically hooks into StateHasChanged.
+
 ### Summary
 
 In all cases, some kind of callback action is required to notify the parent component of a change in the data.

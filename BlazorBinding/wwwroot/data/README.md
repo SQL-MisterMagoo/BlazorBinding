@@ -32,6 +32,12 @@ Demonstrates how events on standard html elements propagate in Blazor. This is v
 ## Using CascadingValue To Share A Global Component - Dialog
 Demonstrates how to use CascadingValue to share a component from MainLayout so that it is globally accessible.
 
+## Autocomplete text input
+Demonstrates how to perform autocomplete on a text input.
+
+## ViewModel Binding
+Demonstrates a simple method to enable a page to bind a ViewModel that automatically hooks into StateHasChanged.
+
 ### Summary
 
 In all cases, some kind of callback action is required to notify the parent component of a change in the data.

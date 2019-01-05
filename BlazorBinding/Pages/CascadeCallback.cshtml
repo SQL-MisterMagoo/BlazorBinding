@@ -49,37 +49,17 @@
             })" />
     </div>
 </div>
-<div class="card">
-    <h5 class="card-header">Invoking StateHasChanged</h5>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="alert alert-info">
-                    <span class="@StateHasChangedCss">Last refresh @DateTime.Now</span>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
-            </div>
-            <p class="card-text">
-                Now click the button to refresh this page - nothing will change except the Last Refresh time, because the
-                Callback has already updated this parent page.
-            </p>
-        </div>
-        <DisplayCode Code="@(new[] {"<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>"})"/>
-        <p class="card-text">
-            Page implementation:
-        </p>
-        <DisplayCode Language="CSharp" Code="@(new[]{
-            "@functions",
-            "{",
-            " bool ParentValue;",
-            " void Refresh(UIMouseEventArgs args) => StateHasChanged();",
-            " void UpdateValue(bool value) { ParentValue = value; Refresh(null); }",
-            "}",
-            })" />
-    </div>
-</div>
+<p>
+    Page implementation:
+</p>
+<DisplayCode Language="CSharp" Code="@(new[]{
+    "@functions",
+    "{",
+    " bool ParentValue;",
+    " void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+    " void UpdateValue(bool value) { ParentValue = value; Refresh(null); }",
+    "}",
+    })" />
 
 @*<div>
     <h3>Event List (@EventList.Count)</h3>

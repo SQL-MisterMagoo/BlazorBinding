@@ -1,5 +1,16 @@
 [
   {
+    "dated": "2019-01-05",
+    "content": "Add ViewModel Binding",
+    "child": [
+      { "text": "Added BlazorComponentExt as the default component base class" },
+      { "text": "This enables the use of the new ModelAttribute," },
+      { "text": "Which auto hooks up StateHasChanged() to IPropertyNotifyChanged events." },
+      { "text": "Moved all @using statements to the base _ViewImports.cshtml to make it easier to add new pages." },
+      { "text": "Tidied up some of the page layouts."}
+    ]
+  },
+  {
     "dated": "2019-01-03",
     "content": "Add Autocomplete text input sample",
     "child": [

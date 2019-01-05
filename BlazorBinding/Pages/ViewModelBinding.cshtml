@@ -39,40 +39,14 @@
         <DisplayCode Language="CSharp"
                      Code="@(new[]{
             "@functions {",
-            "  [Parameter] protected bool Value { get => Value; set => ValueChanged?.Invoke(value);  }",
+            "  bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } }",
+            "  [Parameter] protected bool Value { get; set; }",
             "  [Parameter] protected Action<bool> ValueChanged { get; set; })",
             "}",
             })" />
     </div>
 </div>
 
-
-<div class="card">
-    <h5 class="card-header">Invoking StateHasChanged</h5>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="alert alert-info">
-                    <span class="@StateHasChangedCss">Last refresh @DateTime.Now</span>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <button id="refresh" onclick=@Refresh class="btn btn-standard">Refresh</button>
-            </div>
-        </div>
-        <p class="card-text">
-            Page implementation:
-        </p>
-        <p class="card-text">
-            Now click the button to refresh this page - the child checkbox will revert back to match the parent value<br />
-            because we are doing nothing to propogate the value change from child to parent<br />
-            and Blazor does not do it for us, despite requiring the ValueChanged Action.
-        </p>
-        <DisplayCode Code="@(new[]{
-            "<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>",
-            })"/>
-    </div>
-</div>
 <p>Page Functions</p>
         <DisplayCode Language="CSharp" 
             Code="@(new[]{

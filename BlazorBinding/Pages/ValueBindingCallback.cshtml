@@ -39,7 +39,8 @@
         <DisplayCode Language="CSharp"
                      Code="@(new[]{
             "@functions {",
-            "  [Parameter] protected bool Value { get => Value; set => ValueChanged?.Invoke(value);  }",
+            "  bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } }",
+            "  [Parameter] protected bool Value { get; set; }",
             "  [Parameter] protected Action<bool> ValueChanged { get; set; })",
             "}",
             })" />
@@ -59,9 +60,6 @@
             </div>
         </div>
         <p class="card-text">
-            Page implementation:
-        </p>
-        <p class="card-text">
             Now click the button to refresh this page - the <b>Parent</b> checkbox will revert back to match the Child's value<br />
             because we are propogating the value change from child to parent but there is no automatic Refresh<br />
             <b>The value has propogated back from Child to Parent, but the parent has not refreshed.</b>
@@ -69,15 +67,18 @@
         <DisplayCode Code="@(new[]{
             "<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>",
             })"/>
-        <DisplayCode Language="CSharp" 
-            Code="@(new[]{
-            "@functions {",
-            "bool ParentValue;",
-            "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
-            "}",
-        })"/>
     </div>
 </div>
+<p>
+    Page implementation:
+</p>
+<DisplayCode Language="CSharp" 
+    Code="@(new[]{
+    "@functions {",
+    "bool ParentValue;",
+    "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+    "}",
+})"/>
 
 
 @functions

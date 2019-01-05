@@ -44,36 +44,17 @@
             })"/>
     </div>
 </div>
-<div class="card">
-    <h5 class="card-header">Invoking StateHasChanged</h5>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="alert alert-info">
-                    <span class="@StateHasChangedCss">Last refresh @DateTime.Now</span>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <button id="refresh" onclick=@Refresh class="btn btn-standard">Refresh</button>
-            </div>
-        </div>
-        <p class="card-text">
-            Page implementation:
-        </p>
-        <p class="card-text">
-            Now click the button to refresh this page - Nothing will change except the Last Refresh time, <br />
-            because <b>we are propogating the value change from child to parent and raising a Refresh</b>
-        </p>
-        <DisplayCode Language="CSharp"
-            Code="@(new[]{
-            "@functions {",
-            "bool localParentValue;",
-            "bool ParentValue { get { return localParentValue; } set { localParentValue = value; Refresh(null); } }",
-            "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
-            "}",
-            })" />
-    </div>
-</div>
+<p class="card-text">
+    Page implementation:
+</p>
+<DisplayCode Language="CSharp"
+    Code="@(new[]{
+    "@functions {",
+    "bool localParentValue;",
+    "bool ParentValue { get { return localParentValue; } set { localParentValue = value; Refresh(null); } }",
+    "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+    "}",
+    })" />
 
 @functions
 {

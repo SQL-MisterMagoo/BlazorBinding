@@ -60,9 +60,6 @@
             </div>
         </div>
         <p class="card-text">
-            Page implementation:
-        </p>
-        <p class="card-text">
             Now click the button to refresh this page - the child checkbox will revert back to match the parent value<br />
             because we are doing nothing to propogate the value change from child to parent<br />
             and Blazor does not do it for us, despite requiring the ValueChanged Action.
@@ -70,15 +67,18 @@
         <DisplayCode Code="@(new[]{
             "<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>",
             })"/>
-        <DisplayCode Language="CSharp" 
-            Code="@(new[]{
-            "@functions {",
-            "bool ParentValue;",
-            "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
-            "}",
-            })"/>
     </div>
 </div>
+<p>
+    Page implementation:
+</p>
+<DisplayCode Language="CSharp" 
+    Code="@(new[]{
+    "@functions {",
+    "bool ParentValue;",
+    "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+    "}",
+    })"/>
 
 @functions
 {
