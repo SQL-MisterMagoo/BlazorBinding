@@ -1,4 +1,5 @@
 ﻿@page "/vbc"
+
 <h2>Value Binding With Callback - "Two Way Value Binding - No Refresh"</h2>
 
 <div class="card">
@@ -20,7 +21,7 @@
 <div class="card">
     <h5 class="card-header">This is the Child control</h5>
     <div class="card-body">
-        <p class="card-text">Try clicking the checkbox - it will not update the parent Value.</p>
+        <p class="card-text">Try clicking the checkbox - it will not update the parent Value until you click Refresh below.</p>
         <div class="form-group callout-child @StateHasChangedCss">
             <!-- Child level checkbox -->
             <CheckBox6 bind-Value="@ParentValue" />
@@ -28,20 +29,20 @@
         </div>
         <DisplayCode Code="@(new[]{
             " <CheckBox6 bind-Value=\"@ParentValue\" />",
-            })"/>
+            })" />
         <p class="card-text">The CheckBox6 implementation : </p>
-        <p class="card-text">Here we bind to a local proxy value so we can fire the ValueChanged event when the local value changes.</p>
+        <p class="card-text">We use a custom setter so we can fire the ValueChanged event when the local value changes.</p>
+        <p class="card-text">Invoking the ValueChanged event is required in Blazor.</p>
         <DisplayCode Code="@(new[]{
-            "<input type=\"checkbox\" bind=\"@LocalValue\" />",
-            })"/>
-        <DisplayCode Language="CSharp" 
-            Code="@(new[]{
+            "<input type=\"checkbox\" bind=\"@Value\" />",
+            })" />
+        <DisplayCode Language="CSharp"
+                     Code="@(new[]{
             "@functions {",
-            "  bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } })",
-            "  [Parameter] protected bool Value { get; set; }",
+            "  [Parameter] protected bool Value { get => Value; set => ValueChanged?.Invoke(value);  }",
             "  [Parameter] protected Action<bool> ValueChanged { get; set; })",
             "}",
-            })"/>
+            })" />
     </div>
 </div>
 <div class="card">

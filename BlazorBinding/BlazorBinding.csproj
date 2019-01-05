@@ -48,6 +48,9 @@
     <Content Update="Pages\SimpleBindingObjectCallback.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Pages\ViewModelBinding.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Pages\ValueBindingClassCallbackRefresh.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
