@@ -49,10 +49,4 @@ namespace BlazorBinding.Components
 			StateHasChanged();
 		}
 	}
-
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-	sealed class ModelAttribute : Attribute
-	{
-		public ModelAttribute() { }
-	}
 }
