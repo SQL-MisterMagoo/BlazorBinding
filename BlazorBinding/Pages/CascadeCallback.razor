@@ -22,8 +22,8 @@
         <p class="card-text">This is the child control, try clicking the checkbox - <i>it will update the parent Value.</i></p>
         <div class="form-group callout-child @StateHasChangedCss">
             <!-- Child Level Checkbox -->
-            <CascadingValue Name="ParentValue" Value="@ParentValue">
-                <CheckBox2 Callback="@UpdateValue" />
+            <CascadingValue Value="@ParentValue" Name="ParentValue">
+                <CheckBox2  Callback="@UpdateValue" />
             </CascadingValue>
             <!-- /Child Level Checkbox -->
         </div>
@@ -88,9 +88,12 @@
 @functions
 {
 
-bool ParentValue;
-void Refresh(UIMouseEventArgs args) => StateHasChanged();
-void UpdateValue(bool value) { ParentValue = value; Refresh(null); }
-string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
+    bool ParentValue;
+
+    void Refresh(UIMouseEventArgs args) => StateHasChanged();
+
+    void UpdateValue(bool value) { ParentValue = value; Refresh(null); }
+
+    string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
 
 }
