@@ -1,9 +1,11 @@
 ﻿<label for="child">Click me (child control)</label>
-<input id="child" type="checkbox" bind="@Value" />
+<input id="child" type="checkbox" @bind="@Value" />
 
 
-@functions {
+@code {
 [CascadingParameter(Name = "ParentValue")] bool ParentValue { get; set; }
+
 bool Value { get { return ParentValue; } set { Callback?.Invoke(value); } }
+
 [Parameter] protected Action<bool> Callback { get; set; }
 }

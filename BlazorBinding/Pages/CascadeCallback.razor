@@ -7,7 +7,7 @@
         <div class="form-group callout-parent @StateHasChangedCss">
             <label for="parent">Click me (parent control)</label>
             <!-- Parent level checkbox -->
-            <input id="parent" type="checkbox" bind="@ParentValue" />
+            <input id="parent" type="checkbox" @bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
         <DisplayCode>
@@ -41,7 +41,7 @@
             Here we bind to a local proxy value so we can fire the Callback when the local value changes
         </p>
         <DisplayCode>
-            @("<input type=\"checkbox\" bind=\"@Value\" />")
+            @("<input type=\"checkbox\" @bind=\"@Value\" />")
             @("@functions {")
             @("[CascadingParameter(Name =\"ParentValue\")] bool ParentValue { get; set; }")
             <b>
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="col-sm-8">
-                <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+                <button id="refresh" @onclick="@Refresh" class="btn btn-standard">Refresh</button>
             </div>
             <p class="card-text">
                 Now click the button to refresh this page - nothing will change except the Last Refresh time, because the
@@ -70,7 +70,7 @@
             </p>
         </div>
         <DisplayCode>
-            @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
+            @("<button id=\"refresh\" @onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
         </DisplayCode>
         <p class="card-text">
             Page implementation:

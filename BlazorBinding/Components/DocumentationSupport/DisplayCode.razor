@@ -1,5 +1,7 @@
-﻿<div class="code-highlight-wrap">
-    <a class="btn-sm btn btn-light" onclick="@ToggleCode">@ToggleText code</a>
+﻿@inject IJSRuntime js;
+
+<div class="code-highlight-wrap">
+    <a class="btn-sm btn btn-light" @onclick="@ToggleCode">@ToggleText code</a>
     <div class="code-highlight" style="@ToggleCss" id="@id">
         <pre>
         @ChildContent
@@ -86,7 +88,8 @@
     /// <returns></returns>
     private static async Task<string> GetInnerText(string id)
     {
-        return await JSRuntime.Current.InvokeAsync<string>("getInnerText", id);
+        return await Task.FromResult("todo");
+        //return await js.InvokeAsync<string>("getInnerText", id);
     }
 
     /// <summary>
@@ -97,6 +100,7 @@
     /// <returns></returns>
     private static async Task SetInnerHTML(string id, string html)
     {
-        await JSRuntime.Current.InvokeAsync<string>("setHtml", id, html);
+        await Task.FromResult(0);
+        //await js.InvokeAsync<string>("setHtml", id, html);
     }
 }

@@ -8,7 +8,7 @@
         <div class="form-group callout-parent @StateHasChangedCss">
             <label for="parent">Click me (parent control)</label>
             <!-- Parent level checkbox -->
-            <input id="parent" type="checkbox" bind="@ParentValue" />
+            <input id="parent" type="checkbox" @bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
         <DisplayCode>
@@ -32,7 +32,7 @@
         <p class="card-text">The CheckBox5 implementation : </p>
         <p class="card-text">The "ValueChanged" Action is <b>required</b> by the Blazor engine because we are using the bind-Value syntax.</p>
         <DisplayCode>
-            @("<input type=\"checkbox\" bind=\"@Value\" />")
+            @("<input type=\"checkbox\" @bind=\"@Value\" />")
             @("@functions {")
             @("  [Parameter] protected bool Value { get; set; }")
             @("  [Parameter] protected Action<bool> ValueChanged { get; set; })")
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="col-sm-8">
-                <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+                <button id="refresh" @onclick="@Refresh" class="btn btn-standard">Refresh</button>
             </div>
         </div>
         <p class="card-text">
@@ -64,7 +64,7 @@
             and Blazor does not do it for us, despite requiring the ValueChanged Action.
         </p>
         <DisplayCode>
-            @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
+            @("<button id=\"refresh\" @onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
 
             @("@functions {")
             @("bool ParentValue;")

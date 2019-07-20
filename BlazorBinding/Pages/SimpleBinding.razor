@@ -1,14 +1,14 @@
-﻿@page "/sc"
-<h2>Simple Cascading Value - "One Way Binding"</h2>
+﻿@page "/sb"
+<h2>Simple Binding Value - "One Way Binding"</h2>
 
 <div class="card">
     <h5 class="card-header">This is the parent control</h5>
     <div class="card-body">
-        <p class="card-text">Try clicking the checkbox - the second checkbox will also change because of the CascadingValue.</p>
+        <p class="card-text">The second checkbox will also change because of the Value parameter.</p>
         <div class="form-group callout-parent @StateHasChangedCss">
             <label for="parent">Click me (parent control)</label>
             <!-- Parent level checkbox -->
-            <input id="parent" type="checkbox" bind="@ParentValue" />
+            <input id="parent" type="checkbox" @bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
         <DisplayCode>
@@ -16,28 +16,23 @@
         </DisplayCode>
     </div>
 </div>
-
 <div class="card">
     <h5 class="card-header">This is the Child control</h5>
     <div class="card-body">
         <p class="card-text">Try clicking the checkbox - it will <b class="text-danger">not</b> update the parent Value.</p>
         <div class="form-group callout-child @StateHasChangedCss">
             <!-- Child level checkbox -->
-            <CascadingValue Name="ParentValue" Value="@ParentValue">
-                <CheckBox />
-            </CascadingValue>
+            <CheckBox3 Value="@ParentValue" />
             <!-- /Child level checkbox -->
         </div>
         <DisplayCode>
-            @("<CascadingValue Name=\"ParentValue\" Value=\"@ParentValue\">")
-            @(" <CheckBox />")
-            @("</CascadingValue>")
+            @(" <CheckBox3 Value=\"@ParentValue\" />")
         </DisplayCode>
-        <p class="card-text">The CheckBox implementation : </p>
+        <p class="card-text">The CheckBox3 implementation : </p>
         <DisplayCode>
-            @("<input type=\"checkbox\" bind=\"@Value\" />")
+            @("<input type=\"checkbox\" @bind=\"@Value\" />")
             @("@functions {")
-            @("  [CascadingParameter(Name =\"ParentValue\")] bool Value { get; set; }")
+            @("  [Parameter] protected bool Value { get; set; }")
             @("}")
         </DisplayCode>
     </div>
@@ -52,17 +47,18 @@
                 </div>
             </div>
             <div class="col-sm-8">
-                <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+                <button id="refresh" @onclick="@Refresh" class="btn btn-standard">Refresh</button>
             </div>
         </div>
         <p class="card-text">
             Page implementation:
         </p>
         <p class="card-text">
-            Now click the button to refresh this page - nothing will change except the Last Refresh time, because the CascadingValue is a one-way binding
+            Now click the button to refresh this page - nothing will change except the Last Refresh time, because the Value parameter is a one-way binding.
         </p>
         <DisplayCode>
-            @("<button id=\"refresh\" onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
+            @("<button id=\"refresh\" @onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
+
             @("@functions {")
             @("bool ParentValue;")
             @("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
