@@ -4,7 +4,7 @@
 <div class="card">
     <h5 class="card-header">This is the parent control</h5>
     <div class="card-body">
-        <p class="card-text">Try clicking the checkbox - the second checkbox will also change because of the bind-Value parameter.</p>
+        <p class="card-text">Try clicking the checkbox - the second checkbox will also change because of the @@bind-Value parameter.</p>
         <div class="form-group callout-parent @StateHasChangedCss">
             <label for="parent">Click me (parent control)</label>
             <!-- Parent level checkbox -->
@@ -12,7 +12,7 @@
             <!-- /Parent level checkbox -->
         </div>
         <DisplayCode>
-            @("<input id=parent type=checkbox bind=@ParentValue />")
+            @("<input id=parent type=checkbox @bind=@ParentValue />")
         </DisplayCode>
     </div>
 </div>
@@ -22,11 +22,11 @@
         <p class="card-text">Try clicking the checkbox - <i>it will update the parent Value</i>.</p>
         <div class="form-group callout-child @StateHasChangedCss">
             <!-- Child level checkbox -->
-            <CheckBox6 bind-Value="@ParentValue" />
+            <CheckBox6 @bind-Value="@ParentValue" />
             <!-- /Child level checkbox -->
         </div>
         <DisplayCode>
-            @(" <CheckBox6 bind-Value=\"@ParentValue\" />")
+            @(" <CheckBox6 @bind-Value=\"@ParentValue\" />")
             </DisplayCode>
         <p class="card-text">The CheckBox6 implementation : </p>
         <p class="card-text">Here we bind to a local proxy value so we can fire the ValueChanged event when the local value changes.</p>

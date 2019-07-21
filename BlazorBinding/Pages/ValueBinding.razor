@@ -12,7 +12,7 @@
             <!-- /Parent level checkbox -->
         </div>
         <DisplayCode>
-            @("<input id=parent type=checkbox bind=@ParentValue />")
+            @("<input id=parent type=checkbox @bind=@ParentValue />")
         </DisplayCode>
     </div>
 </div>
@@ -23,14 +23,14 @@
         <p class="card-text">Try clicking the checkbox - it will <b class="text-danger">not</b> update the parent Value.</p>
         <div class="form-group callout-child @StateHasChangedCss">
             <!-- Child level checkbox -->
-            <CheckBox5 bind-Value="@ParentValue" />
+            <CheckBox5 @bind-Value="@ParentValue" />
             <!-- /Child level checkbox -->
         </div>
         <DisplayCode>
-            @(" <CheckBox5 bind-Value=\"@ParentValue\" />")
+            @(" <CheckBox5 @bind-Value=\"@ParentValue\" />")
         </DisplayCode>
         <p class="card-text">The CheckBox5 implementation : </p>
-        <p class="card-text">The "ValueChanged" Action is <b>required</b> by the Blazor engine because we are using the bind-Value syntax.</p>
+        <p class="card-text">The "ValueChanged" Action is <b>required</b> by the Blazor engine because we are using the @@bind-Value syntax.</p>
         <DisplayCode>
             @("<input type=\"checkbox\" @bind=\"@Value\" />")
             @("@functions {")

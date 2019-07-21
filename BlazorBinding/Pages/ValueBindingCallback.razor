@@ -12,7 +12,7 @@
             <!-- /Parent level checkbox -->
         </div>
         <DisplayCode>
-            @("<input id=parent type=checkbox bind=@ParentValue />")
+            @("<input id=parent type=checkbox @bind=@ParentValue />")
         </DisplayCode>
     </div>
 </div>
@@ -23,11 +23,11 @@
         <p class="card-text">Try clicking the checkbox - it will not update the parent Value.</p>
         <div class="form-group callout-child @StateHasChangedCss">
             <!-- Child level checkbox -->
-            <CheckBox6 bind-Value="@ParentValue" />
+            <CheckBox6 @bind-Value="@ParentValue" />
             <!-- /Child level checkbox -->
         </div>
         <DisplayCode>
-            @(" <CheckBox6 bind-Value=\"@ParentValue\" />")
+            @(" <CheckBox6 @bind-Value=\"@ParentValue\" />")
         </DisplayCode>
         <p class="card-text">The CheckBox6 implementation : </p>
         <p class="card-text">Here we bind to a local proxy value so we can fire the ValueChanged event when the local value changes.</p>
