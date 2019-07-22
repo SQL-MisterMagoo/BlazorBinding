@@ -1,8 +1,8 @@
 ﻿<label for="child">Click me (child control)</label>
-<input type="checkbox" bind="@Value" />
+<input type="checkbox" @bind="@Value" />
 
 
-@functions
+@code
 {
 [CascadingParameter(Name = "ParentValue")] bool Value { get; set; }
 }

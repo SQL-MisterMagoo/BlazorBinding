@@ -9,7 +9,7 @@
         <div class="form-group callout-parent @StateHasChangedCss">
             <label for="parent">Click me (parent control)</label>
             <!-- Parent level checkbox -->
-            <input id="parent" type="checkbox" bind="@ParentValue" />
+            <input id="parent" type="checkbox" @bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
         <DisplayCode Code="@(new[]{
@@ -24,7 +24,7 @@
         <p class="card-text">Try clicking the checkbox - it will <b class="text-danger">not</b> update the parent Value.</p>
         <div class="form-group callout-child @StateHasChangedCss">
             <!-- Child level checkbox -->
-            <CheckBox5 bind-Value="@ParentValue" />
+            <CheckBox5 @bind-Value="@ParentValue" />
             <!-- /Child level checkbox -->
         </div>
         <DisplayCode Code="@(new[]{
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="col-sm-8">
-                <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+                <button id="refresh" @onclick="@Refresh" class="btn btn-standard">Refresh</button>
             </div>
         </div>
         <p class="card-text">

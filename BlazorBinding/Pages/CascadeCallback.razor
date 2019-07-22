@@ -9,7 +9,7 @@
         <div class="form-group callout-parent @StateHasChangedCss">
             <label for="parent">Click me (parent control)</label>
             <!-- Parent level checkbox -->
-            <input id="parent" type="checkbox" bind="@ParentValue" />
+            <input id="parent" type="checkbox" @bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
         <DisplayCode Code="@(new[]{ "<input id='parent' type='checkbox' bind='@ParentValue' />"})"/>

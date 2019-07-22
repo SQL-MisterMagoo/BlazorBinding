@@ -8,7 +8,7 @@
         <div class="form-group callout-parent @StateHasChangedCss">
             <label for="parent">Click me (parent control)</label>
             <!-- Parent level checkbox -->
-            <input id="parent" type="checkbox" bind="@ParentValue"/>
+            <input id="parent" type="checkbox" @bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
 
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="col-sm-8">
-                <button id="refresh" onclick="@Refresh" class="btn btn-standard">Refresh</button>
+                <button id="refresh" @onclick="@Refresh" class="btn btn-standard">Refresh</button>
             </div>
         </div>
         <p class="card-text">
