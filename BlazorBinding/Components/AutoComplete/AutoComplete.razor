@@ -1,7 +1,6 @@
-﻿@inherits BlazorComponent
-
+﻿
 <div class="form-group" style="height: 1.75rem;">
-    <input class="form-control" value="@data" oninput="@InputChanged" onkeydown="@KeyPress" autofocus="autofocus" onblur="@HideDropdown" />
+    <input class="form-control" value="@data" @oninput="@InputChanged" @onkeydown="@KeyPress" autofocus="autofocus" @onblur="@HideDropdown" />
     @if (suggestions?.Count > 0)
     {
         <div class="btn-group" tabindex="-1">
@@ -22,7 +21,7 @@
 </div>
 <DisplayCode Language="CSharp" Code="@PageContents" />
 
-@functions
+@code
 {
   [Parameter] protected IEnumerable<string> AllowedValues { get; set; }
   [Parameter] protected RenderFragment<SuggestionItems> ListItemContent { get; set; }

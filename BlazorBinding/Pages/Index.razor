@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Text.Json.Serialization
 
 <div class="card">
     <h1 class="card-header">Data Binding Examples</h1>
@@ -50,7 +51,7 @@
       try
       {
           var changeLogItems = await httpClient.GetStringAsync("data/changelog.json");
-          ChangeLogItems = Json.Deserialize<ChangeLog[]>(changeLogItems) ;
+          ChangeLogItems = JsonSerializer.Parse<ChangeLog[]>(changeLogItems) ;
           Console.WriteLine($"Got {ChangeLogItems} ChangeLogItems");
       }
       catch (Exception e)

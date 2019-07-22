@@ -10,9 +10,7 @@
             <input id="parent" type="checkbox" @bind="@ParentValue" />
             <!-- /Parent level checkbox -->
         </div>
-        <DisplayCode>
-            @("<input id=parent type=checkbox @bind=@ParentValue />")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{"<input id=parent type=checkbox @bind=@ParentValue />"})"/>
     </div>
 </div>
 
@@ -25,21 +23,16 @@
             <CheckBox4 Value="@ParentValue" Callback="@UpdateValue" /> 
             <!-- /Child level checkbox -->
         </div>
-        <DisplayCode>
-            @(" <CheckBox4 Value=\"@ParentValue\" />")
-        </DisplayCode>
+        <DisplayCode Code="@(new[]{"<CheckBox4 Value=\"@ParentValue\" />"})"/>
         <p class="card-text">The CheckBox4 implementation : </p>
         <p class="card-text">Here we bind to a local proxy value so we can fire the Callback when the local value changes.</p>
-        <DisplayCode>
-            @("<input type=\"checkbox\" @bind=\"")<b>@("@LocalValue")</b>@("\" />")
-            @("@functions {")
-            @("[Parameter] protected bool Value { get; set; }")
-            <b>
-                @("bool LocalValue { get { return Value; } set { Callback?.Invoke(value); } }")
-            @("[Parameter] protected Action<bool> Callback { get; set; }")
-        </b>
-        @("}")
-    </DisplayCode>
+        <DisplayCode Code="@(new[]{"<input type=\"checkbox\" @bind=\"@LocalValue\" />",
+            "@functions {",
+            "[Parameter] protected bool Value { get; set; }",
+            "[Parameter] protected Action<bool> Callback { get; set; }",
+            "bool LocalValue { get { return Value; } set { Callback?.Invoke(value); } }",
+            "}"
+            })"/>
 </div>
 </div>
 <div class="card">
@@ -61,19 +54,18 @@
         <p class="card-text">
             Now click the button to refresh this page - nothing will change except the Last Refresh time, because we are propogating the value back from Child to Parent and refreshing the Parent.
         </p>
-        <DisplayCode>
-            @("<button id=\"refresh\" @onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>")
-
-            @("@functions {")
-            @("bool ParentValue;")
-            @("void Refresh(UIMouseEventArgs args) => StateHasChanged();")
-            <b>@("void UpdateValue(bool value) { ParentValue = value; Refresh(null); })")</b>
-            @("}")
-        </DisplayCode>
+        <DisplayCode Language="CSharp" Code="@(new[]{
+            "<button id=\"refresh\" @onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>",
+            "@functions {",
+            "bool ParentValue;",
+            "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+            "void UpdateValue(bool value) { ParentValue = value; Refresh(null); })",
+            "}"
+            })"/>
     </div>
 </div>
 
-@functions
+@code
 {
     bool ParentValue;
     void Refresh(UIMouseEventArgs args) => StateHasChanged();

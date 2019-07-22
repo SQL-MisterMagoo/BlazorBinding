@@ -9,19 +9,19 @@ else
     foreach (var listItem in ListData)
     {
         <div class="list-group-sm">
-            <button onclick="@(e => SelectItem(listItem) )" class="list-group-item list-group-item-action @GetActive(listItem)">
+            <button @onclick="@(e => SelectItem(listItem) )" class="list-group-item list-group-item-action @GetActive(listItem)">
                 <div class="input-group">
                     <span class="d-flex w-50 justify-content-between col">
                         @ListItemContent(listItem)
                     </span>
-                    <button class="btn btn-sm btn-danger" onclick=@(e => DeleteItem(listItem))>X</button>
+                    <button class="btn btn-sm btn-danger" @onclick=@(e => DeleteItem(listItem))>X</button>
                 </div>
             </button>
         </div>
     }
 }
 
-@functions
+@code
 {
 TList activeItem;
 

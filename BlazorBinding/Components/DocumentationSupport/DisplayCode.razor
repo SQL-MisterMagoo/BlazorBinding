@@ -1,9 +1,10 @@
-﻿@inject ICodeHighlighter CodeHighlighter
+﻿@using BlazorBinding.Services
+@inject ICodeHighlighter CodeHighlighter
 
 @if (Code != null)
 {
     <div class="code-highlight-wrap mt-1">
-        <a class="btn btn-sm btn-outline-info" onclick="@ToggleCode">@ToggleText code</a>
+        <a class="btn btn-sm btn-outline-info" @onclick="@ToggleCode">@ToggleText code</a>
         @if (displayCode)
         {
             <div class="code-highlight">
@@ -13,7 +14,8 @@
     </div>
 }
 
-@functions {
+@code
+{
 bool displayCode = false;
 [Parameter] protected string Language { get; set; } = "HTML";
 [Parameter] protected string[] Code { get; set; }

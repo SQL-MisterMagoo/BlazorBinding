@@ -1,5 +1,5 @@
 @inherits LayoutComponentBase
-
+@using BlazorBinding.Components
 <div class="sidebar">
     <NavMenu />
 </div>
@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<MMDialog ref="MMDialogRef">
+<MMDialog @ref="MMDialogRef">
 </MMDialog>
 
 @functions

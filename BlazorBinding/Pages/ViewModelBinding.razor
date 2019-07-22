@@ -1,5 +1,5 @@
 ﻿@page "/vm"
-
+@inherits BlazorComponentExt
 <h2>View Model Binding - "Two Way Value Binding"</h2>
 
 <div class="card">
@@ -9,11 +9,11 @@
         <div class="form-group callout-parent @StateHasChangedCss">
             <label for="parent">Click me (parent control)</label>
             <!-- Parent level checkbox -->
-            <input id="parent" type="checkbox" bind="@PageModel.Toggle" />
+            <input id="parent" type="checkbox" @bind="@PageModel.Toggle" />
             <!-- /Parent level checkbox -->
         </div>
         <DisplayCode Code="@(new[]{
-            "<input id=\"parent\" type=\"checkbox\" bind=\"@PageModel.Toggle\" />"
+            "<input id=\"parent\" type=\"checkbox\" @bind=\"@PageModel.Toggle\" />"
             })"/>
     </div>
 </div>
@@ -24,17 +24,17 @@
         <p class="card-text">Try clicking the checkbox - it will also update the parent Value because we are using a ViewModel.</p>
         <div class="form-group callout-child @StateHasChangedCss">
             <!-- Child level checkbox -->
-            <CheckBox6 bind-Value="@PageModel.Toggle" />
+            <CheckBox6 @bind-Value="@PageModel.Toggle" />
             <!-- /Child level checkbox -->
         </div>
         <DisplayCode Code="@(new[]{
-            " <CheckBox6 bind-Value=\"@PageModel.Toggle\" />"
+            " <CheckBox6 @bind-Value=\"@PageModel.Toggle\" />"
             })" />
         <p class="card-text">The CheckBox6 implementation : </p>
         <p class="card-text">We use a custom setter so we can fire the ValueChanged event when the local value changes.</p>
         <p class="card-text">Invoking the ValueChanged event is required in Blazor.</p>
         <DisplayCode Code="@(new[]{
-            "<input type=\"checkbox\" bind=\"@Value\" />",
+            "<input type=\"checkbox\" @bind=\"@Value\" />",
             })" />
         <DisplayCode Language="CSharp"
                      Code="@(new[]{
@@ -55,7 +55,7 @@
             " void Refresh(UIMouseEventArgs args) => StateHasChanged();",
             "}",
             })"/>
-@functions
+@code
 {
 
   [ModelAttribute] BlazorBinding.Models.DataModel PageModel { get; set; }

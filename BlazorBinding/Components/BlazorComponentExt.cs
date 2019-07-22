@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Blazor;
+﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.ComponentModel;
-using System.Linq;
-using Blazor = Microsoft.AspNetCore.Blazor.Components;
+using Blazor = Microsoft.AspNetCore.Components;
 
 namespace BlazorBinding.Components
 {
-	public partial class BlazorComponentExt : Blazor.BlazorComponent
+    public partial class BlazorComponentExt : ComponentBase
 	{
 		[Blazor.Parameter] protected RenderFragment Body { get; set; }
 

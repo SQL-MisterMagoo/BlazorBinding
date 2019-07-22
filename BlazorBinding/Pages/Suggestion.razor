@@ -1,4 +1,6 @@
 ﻿@page "/sugg"
+@using GenFu
+@using BlazorBinding.Components.AutoComplete
 
 @if (values == null)
 {
@@ -17,7 +19,7 @@ else
 
 <span>Page Code </span><DisplayCode Language="CSharp" Code="@PageContents" />
 
-@functions
+@code
 {
 [Inject] HttpClient httpClient { get; set; }
 
