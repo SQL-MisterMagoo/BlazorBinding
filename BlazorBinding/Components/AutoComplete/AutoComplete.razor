@@ -1,0 +1,156 @@
+﻿
+<div class="form-group" style="height: 1.75rem;">
+    <input class="form-control" value="@data" @oninput="@InputChanged" @onkeydown="@KeyPress" autofocus="autofocus" @onblur="@HideDropdown" />
+    @if (suggestions?.Count > 0)
+    {
+        <div class="btn-group" tabindex="-1">
+            <div class="dropdown-menu show">
+                @foreach (var item in suggestions)
+                {
+                    <button onclick="@(e => SelectItem(item) )" class="dropdown-item py-0 @item.Selected" tabindex="-1">
+                        <div class="input-group">
+                            <span class="d-flex w-50 justify-content-between col">
+                                @ListItemContent(item)
+                            </span>
+                        </div>
+                    </button>
+                }
+            </div>
+        </div>
+    }
+</div>
+<DisplayCode Language="CSharp" Code="@PageContents" />
+
+@code
+{
+  [Parameter] protected IEnumerable<string> AllowedValues { get; set; }
+  [Parameter] protected RenderFragment<SuggestionItems> ListItemContent { get; set; }
+
+  [Inject] HttpClient httpClient { get; set; }
+
+  List<SuggestionItems> suggestions;
+  string data;
+  Task worker;
+  string[] PageContents;
+
+  async Task HideDropdown(UIFocusEventArgs args)
+  {
+      suggestions?.Clear();
+      await Task.FromResult(true);
+  }
+
+  async Task InputChanged(UIChangeEventArgs args)
+  {
+      await Task.Delay(0);
+      worker = ProcessInput(args.Value.ToString());
+  }
+
+  async Task KeyPress(UIKeyboardEventArgs args)
+  {
+      if (suggestions?.Count == 0)
+          return;
+      if (args.Code == "ArrowDown")
+          await SelectNextItem();
+      if (args.Code == "ArrowUp")
+          await SelectPrevItem();
+      if (args.Code == "Enter")
+          await HideDropdown(null);
+  }
+
+  async Task SelectItem(SuggestionItems item)
+  {
+      suggestions.ForEach(s => s.Selected = "");
+      item.Selected = "active";
+      await Task.FromResult(true);
+  }
+
+  async Task SelectNextItem()
+  {
+      int last = -1;
+      for (int i = 0; i < suggestions.Count; i++)
+      {
+          var sugg = suggestions[i];
+          if (sugg.Selected?.Length > 0)
+          {
+              sugg.Selected = "";
+              last = i;
+              break;
+          }
+      }
+      last++;
+      if (last >= suggestions.Count)
+      {
+          last = 0;
+      }
+      suggestions[last].Selected = "active";
+      data = suggestions[last].Title;
+      await Task.FromResult(true);
+  }
+
+  async Task SelectPrevItem()
+  {
+      int last = suggestions.Count;
+      for (int i = 0; i < suggestions.Count; i++)
+      {
+          var sugg = suggestions[i];
+          if (sugg.Selected?.Length > 0)
+          {
+              sugg.Selected = "";
+              last = i;
+              break;
+          }
+      }
+      last--;
+      if (last < 0)
+      {
+          last = suggestions.Count;
+      }
+      suggestions[last].Selected = "active";
+      data = suggestions[last].Title;
+      await Task.FromResult(true);
+  }
+
+  Task ProcessInput(string value)
+  {
+      suggestions = AllowedValues
+          .Where(s => s?.StartsWith(value, StringComparison.OrdinalIgnoreCase) ?? false)
+          .Take(20)
+          .OrderBy(s => s)
+          .Select(s => new SuggestionItems() { Value = s, Title = s })
+          .ToList();
+      //StateHasChanged();
+      return Task.CompletedTask;
+  }
+
+  public class SuggestionItems
+  {
+      public string Value;
+      public string Selected;
+      public string Title;
+      public override string ToString()
+      {
+          return Title;
+      }
+  }
+
+  protected async override Task OnParametersSetAsync()
+  {
+      await base.OnParametersSetAsync();
+
+      Task.Factory.StartNew(async () =>
+      {
+          try
+          {
+              var stream = await httpClient.GetStringAsync("https://raw.githubusercontent.com/SQL-MisterMagoo/BlazorBinding/master/BlazorBinding/Components/AutoComplete/AutoComplete.cshtml");
+              PageContents = stream.Split(Environment.NewLine.ToCharArray());
+              StateHasChanged();
+          }
+          catch (Exception ex)
+          {
+              Console.WriteLine("Failed to load AutoComplete.cshtml");
+              Console.WriteLine(ex.GetBaseException().Message);
+          }
+      });
+
+  }
+}

@@ -1,0 +1,76 @@
+﻿@page "/tpwc"
+
+<h2>The Problem With Clicks - "Propagation"</h2>
+
+<div class="card" @onclick="@OnParentClick">
+    <h5 class="card-header">This is the parent control</h5>
+    <div class="card-body">
+        <p class="card-text">Try clicking the parent - </p>
+        <div class="form-group callout-parent @ParentPingCss">
+            <label for="parent">Click me (parent control)</label>
+        </div>
+        <DisplayCode Code="@(new[]{
+            "<div class=\"card\" @onclick=\"@OnParentClick\">",
+        })" />
+        <DisplayCode Language="CSharp" Code="@(new[]{
+            "@functions {",
+            "bool ParentPingValue;",
+            "string ParentPingCss => ParentPingValue ? \"ping-on\" : \"ping-off\";",
+            "void OnParentClick(UIMouseEventArgs args) => ParentPingValue = !ParentPingValue;",
+            "}",
+        })" />
+        <div class="card" @onclick="@OnChildClick">
+            <h5 class="card-header">This is the child control</h5>
+            <div class="card-body">
+                <p class="card-text">Try clicking the child and/or the hide/show code buttons and watch the parent. </p>
+                <div class="form-group callout-child @ChildPingCss">
+                    <label for="child">Click me (child control)</label>
+                </div>
+                <DisplayCode Code="@(new[]{
+                    "<div class=\"card\" @onclick=\"@OnChildClick\">",
+                })" />
+                <DisplayCode Language="CSharp" Code="@(new[]{
+                    "@functions {",
+                    "bool ChildPingValue;",
+                    "string ChildPingCss => ChildPingValue ? \"ping-on\" : \"ping-off\";",
+                    "void OnChildClick(UIMouseEventArgs args) => ChildPingValue = !ChildPingValue;",
+                    "}",
+                })" />
+                <div class="card" @onclick="@(OnGrandChildClick)">
+                    <h5 class="card-header">This is the grandchild control</h5>
+                    <div class="card-body">
+                        <p class="card-text">Try clicking the grandchild </p>
+                        <div class="form-group callout-child @GrandChildPingCss">
+                            <label for="grandchild">Click me (grandchild control)</label>
+                        </div>
+                        <DisplayCode Code="@(new[]{
+                                "<div class=\"card\" @onclick=\"@OnGrandChildClick\">",
+                            })" />
+                        <DisplayCode Language="CSharp" Code="@(new[]{
+                                "@functions {",
+                                "bool GrandChildPingValue;",
+                                "string GrandChildPingCss => GrandChildPingValue ? \"ping-on\" : \"ping-off\";",
+                                "void OnGrandChildClick(UIMouseEventArgs args) => GrandChildPingValue = !GrandChildPingValue;",
+                                "}",
+                            })" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code
+{
+bool ParentPingValue;
+string ParentPingCss => ParentPingValue ? "ping-on" : "ping-off";
+void OnParentClick(UIMouseEventArgs args) { ParentPingValue = !ParentPingValue; StateHasChanged(); }
+
+bool ChildPingValue;
+string ChildPingCss => ChildPingValue ? "ping-on" : "ping-off";
+void OnChildClick(UIMouseEventArgs args) { ChildPingValue = !ChildPingValue; StateHasChanged(); }
+
+bool GrandChildPingValue;
+string GrandChildPingCss => GrandChildPingValue ? "ping-on" : "ping-off";
+void OnGrandChildClick(UIMouseEventArgs args) { GrandChildPingValue = !GrandChildPingValue; StateHasChanged(); }
+}

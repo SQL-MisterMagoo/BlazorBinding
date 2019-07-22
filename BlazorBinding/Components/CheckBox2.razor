@@ -1,0 +1,11 @@
+﻿<label for="child">Click me (child control)</label>
+<input id="child" type="checkbox" @bind="@Value" />
+
+
+@code {
+    [CascadingParameter(Name = "ParentValue")] bool ParentValue { get; set; }
+
+    bool Value { get { return ParentValue; } set { Callback?.Invoke(value); } }
+
+    [Parameter] public Action<bool> Callback { get; private set; }
+}

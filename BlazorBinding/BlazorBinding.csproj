@@ -2,73 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RunCommand>dotnet</RunCommand>
-    <RunArguments>blazor serve</RunArguments>
-    <RestoreAdditionalProjectSources>
-      https://dotnet.myget.org/f/blazor-dev/api/v3/index.json;
-    </RestoreAdditionalProjectSources>
     <LangVersion>7.3</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;CS0234;</NoWarn>
-    <WarningLevel>4</WarningLevel>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <BlazorLinkOnBuild>true</BlazorLinkOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="GenFu" Version="1.5.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview6.19307.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview6.19307.2" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="3.0.0-preview6.19307.2" PrivateAssets="all" />
+    <PackageReference Include="ColorCode.Core" Version="2.0.6" />
     <PackageReference Include="ColorCode.HTML" Version="2.0.6" />
-    <PackageReference Include="Markdig" Version="0.15.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="$(BlazorVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(BlazorVersion)" PrivateAssets="all" />
+    <PackageReference Include="Markdig" Version="0.17.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
-    <PackageReference Update="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" />
-    <DotNetCliToolReference Include="Microsoft.AspNetCore.Blazor.Cli" Version="$(BlazorVersion)" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Components\CheckBox6.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Components\CheckBox5.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Components\CheckBox4.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Components\CheckBox3.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Components\CheckBox2.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Pages\CascadeCallback.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Pages\SimpleBindingObjectCallback.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Pages\ViewModelBinding.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Pages\ValueBindingClassCallbackRefresh.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Pages\ValueBindingCallbackRefresh.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Pages\ValueBindingCallback.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Pages\ValueBinding.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Pages\SimpleBindingCallback.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Pages\SimpleBinding.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,12 @@
 [
   {
+    "dated": "2019-07-23",
+    "content": "Update to Asp.Net Core 3 Preview 6",
+    "child": [
+      { "text": "Many thanks to <a href='https://github.com/conficient'>Howard Richards</a> for the majority of the work in updating to preview 6" }
+    ]
+  },
+  {
     "dated": "2019-01-05",
     "content": "Add ViewModel Binding",
     "child": [

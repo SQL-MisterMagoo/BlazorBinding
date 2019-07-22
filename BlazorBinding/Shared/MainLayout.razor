@@ -1,0 +1,40 @@
+@inherits LayoutComponentBase
+@using BlazorBinding.Components
+<div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main">
+    <div class="top-row px-4">
+        <a href="http://blazor.net" target="_blank" class="ml-md-auto">Blazor.Net</a>
+    </div>
+
+    <div class="content px-4">
+        <CascadingValue Name="Global" Value=this>
+            @Body
+        </CascadingValue>
+    </div>
+</div>
+
+<MMDialog @ref="MMDialogRef">
+</MMDialog>
+
+@functions
+{
+    public MMDialog MMDialogRef { get; private set; }
+
+    protected override void OnAfterRender()
+    {
+        base.OnInit();
+        if (MMDialogRef == null)
+        {
+            Console.WriteLine($"No REF");
+        }
+        else
+        {
+            Console.WriteLine($"TYPE: {MMDialogRef.GetType().Name}");
+        }
+    }
+
+    //
+}

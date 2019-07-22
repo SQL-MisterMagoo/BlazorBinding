@@ -1,0 +1,8 @@
+﻿<label for="child">Click me (child control)</label>
+<input id="child" type="checkbox" @bind="@Value" />
+
+
+@code
+{
+  [Parameter] protected bool Value { get; set; }
+}

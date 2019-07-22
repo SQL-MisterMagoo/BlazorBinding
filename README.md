@@ -14,7 +14,7 @@ Demonstrates the use of parameter binding, which is a one-way binding like the C
 Demonstrates how you can add a Callback Action to update the parent values from the child.
 
 ## Value Binding
-Demonstrates how the bind-Value syntax works in a one-way mode, like simple binding.
+Demonstrates how the @bind-Value syntax works in a one-way mode, like simple binding.
 *This is considered to be a bug by many*
 
 ## Value Binding With Callback

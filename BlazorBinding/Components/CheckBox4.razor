@@ -1,0 +1,11 @@
+﻿<label for="child">Click me (child control)</label>
+<input id="child" type="checkbox" @bind="@LocalValue" />
+
+
+@code {
+[Parameter] protected bool Value { get; set; }
+
+bool LocalValue { get { return Value; } set { Callback?.Invoke(value); } }
+
+[Parameter] protected Action<bool> Callback { get; set; }
+}

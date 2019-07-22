@@ -1,0 +1,91 @@
+﻿
+<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">BlazorBinding</a>
+    <button class="navbar-toggler" @onclick=@ToggleNavMenu>
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class=@(collapseNavMenu ? "collapse" : null) @onclick=@ToggleNavMenu>
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match=NavLinkMatch.All>
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="readme">
+                <span class="oi oi-home" aria-hidden="true"></span> README
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="sc">
+                <span class="oi oi-plus" aria-hidden="true"></span> Simple Cascade
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="cc">
+                <span class="oi oi-plus" aria-hidden="true"></span> Cascade Callback
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="sb">
+                <span class="oi oi-plus" aria-hidden="true"></span> Simple Binding
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="sbc">
+                <span class="oi oi-plus" aria-hidden="true"></span> Simple Binding Callback
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="vb">
+                <span class="oi oi-plus" aria-hidden="true"></span> Value Binding
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="vbc">
+                <span class="oi oi-plus" aria-hidden="true"></span> Value Binding Callback
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="vbcr">
+                <span class="oi oi-plus" aria-hidden="true"></span> Value Binding Callback + Refresh
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="vbccr">
+                <span class="oi oi-plus" aria-hidden="true"></span> Value Binding Class Object
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="tpwc">
+                <span class="oi oi-plus" aria-hidden="true"></span> The Problem With Clicks
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="dia">
+                <span class="oi oi-plus" aria-hidden="true"></span> Globally Scoped Dialog
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="sugg">
+                <span class="oi oi-plus" aria-hidden="true"></span> Autocomplete Text Input
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="vm">
+                <span class="oi oi-plus" aria-hidden="true"></span> ViewModel Binding
+            </NavLink>
+        </li>
+    </ul>
+</div>
+
+@functions {
+    bool collapseNavMenu = true;
+
+    void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}
