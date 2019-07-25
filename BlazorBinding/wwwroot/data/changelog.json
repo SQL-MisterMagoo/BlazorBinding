@@ -1,5 +1,9 @@
 [
   {
+    "dated": "2019-07-26",
+    "content": "Update to Asp.Net Core 3 Preview 7"
+  },
+  {
     "dated": "2019-07-23",
     "content": "Update to Asp.Net Core 3 Preview 6",
     "child": [
