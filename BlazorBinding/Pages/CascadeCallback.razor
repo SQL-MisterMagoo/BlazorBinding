@@ -42,7 +42,7 @@
         <DisplayCode Language="CSharp" 
             Code="@(new[]{"@functions",
             "{" ,
-            " [Parameter] protected Action<bool> Callback { get; set; }" ,
+            " [Parameter] public Action<bool> Callback { get; set; }" ,
             " [CascadingParameter(Name =\" ParentValue\")] bool ParentValue { get; set; }",
             " bool Value { get { return ParentValue; } set { Callback?.Invoke(value); } }" ,
             "}" ,
@@ -56,7 +56,7 @@
     "@functions",
     "{",
     " bool ParentValue;",
-    " void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+    " void Refresh(MouseEventArgs args) => StateHasChanged();",
     " void UpdateValue(bool value) { ParentValue = value; Refresh(null); }",
     "}",
     })" />

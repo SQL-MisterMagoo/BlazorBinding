@@ -7,5 +7,5 @@
 
     bool Value { get { return ParentValue; } set { Callback?.Invoke(value); } }
 
-    [Parameter] public Action<bool> Callback { get; private set; }
+    [Parameter] public Action<bool> Callback { get; set; }
 }

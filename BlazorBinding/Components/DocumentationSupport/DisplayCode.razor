@@ -17,8 +17,8 @@
 @code
 {
 bool displayCode = false;
-[Parameter] protected string Language { get; set; } = "HTML";
-[Parameter] protected string[] Code { get; set; }
+[Parameter] public string Language { get; set; } = "HTML";
+[Parameter] public string[] Code { get; set; }
 MarkupString cache;
 private MarkupString CodeMarkup
 {

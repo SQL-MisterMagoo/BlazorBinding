@@ -23,9 +23,8 @@
 {
     public MMDialog MMDialogRef { get; private set; }
 
-    protected override void OnAfterRender()
+    protected override void OnAfterRender(bool firstRender)
     {
-        base.OnInit();
         if (MMDialogRef == null)
         {
             Console.WriteLine($"No REF");

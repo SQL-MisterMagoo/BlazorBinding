@@ -38,8 +38,8 @@
             Code="@(new[]{
             "@functions {",
             "  bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } })",
-            "  [Parameter] protected bool Value { get; set; }",
-            "  [Parameter] protected Action<bool> ValueChanged { get; set; })",
+            "  [Parameter] public bool Value { get; set; }",
+            "  [Parameter] public Action<bool> ValueChanged { get; set; })",
             "}",
             })"/>
     </div>
@@ -52,7 +52,7 @@
     "@functions {",
     "bool localParentValue;",
     "bool ParentValue { get { return localParentValue; } set { localParentValue = value; Refresh(null); } }",
-    "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+    "void Refresh(MouseEventArgs args) => StateHasChanged();",
     "}",
     })" />
 
@@ -61,7 +61,7 @@
 
   bool localParentValue;
   bool ParentValue { get { return localParentValue; } set { localParentValue = value; Refresh(null); } }
-  protected void Refresh(UIMouseEventArgs args) { StateHasChanged(); }
+  protected void Refresh(MouseEventArgs args) { StateHasChanged(); }
   string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
 
 }

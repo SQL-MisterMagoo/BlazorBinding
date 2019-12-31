@@ -41,7 +41,7 @@
         }
 
         <DisplayCode Language="CSharp" Code="@(new[]{
-            "void Clicked(UIMouseEventArgs args)      ",
+            "void Clicked(MouseEventArgs args)      ",
             "{                                        ",
             "  if (global == null)                      ",
             "  {                                        ",
@@ -64,13 +64,13 @@
             "                                           ",
             "  global.MMDialogRef.Show();               ",
             "}                                          ",
-            "protected void BtnPriCallback(UIMouseEventArgs args)",
+            "protected void BtnPriCallback(MouseEventArgs args)",
             "{",
             "    Message = $\"User clicked dialog button 1 - {BtnPri}\";",
             "    global?.MMDialogRef?.Hide();",
             "    StateHasChanged();",
             "}",
-            "protected void BtnSecCallback(UIMouseEventArgs args)",
+            "protected void BtnSecCallback(MouseEventArgs args)",
             "{",
             "    Message = $\"User clicked dialog button 2 - {BtnSec}\";",
             "    global?.MMDialogRef?.Hide();",
@@ -90,7 +90,7 @@
   string BtnSec; bool HideSec;
   string Message;
 
-  void Clicked(UIMouseEventArgs args)
+  void Clicked(MouseEventArgs args)
   {
       if (global == null)
       {
@@ -118,13 +118,13 @@
       Console.WriteLine($"BTN 1: {BtnPri}");
       Console.WriteLine($"BTN 2: {BtnSec}");
   }
-  protected void BtnPriCallback(UIMouseEventArgs args)
+  protected void BtnPriCallback(MouseEventArgs args)
   {
       Message = $"User clicked dialog button 1 - {BtnPri}";
       global?.MMDialogRef?.Hide();
       StateHasChanged();
   }
-  protected void BtnSecCallback(UIMouseEventArgs args)
+  protected void BtnSecCallback(MouseEventArgs args)
   {
       Message = $"User clicked dialog button 2 - {BtnSec}";
       global?.MMDialogRef?.Hide();

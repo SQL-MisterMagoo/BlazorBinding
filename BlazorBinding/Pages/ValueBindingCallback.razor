@@ -40,8 +40,8 @@
                      Code="@(new[]{
             "@functions {",
             "  bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } }",
-            "  [Parameter] protected bool Value { get; set; }",
-            "  [Parameter] protected Action<bool> ValueChanged { get; set; })",
+            "  [Parameter] public bool Value { get; set; }",
+            "  [Parameter] public Action<bool> ValueChanged { get; set; })",
             "}",
             })" />
     </div>
@@ -76,7 +76,7 @@
     Code="@(new[]{
     "@functions {",
     "bool ParentValue;",
-    "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+    "void Refresh(MouseEventArgs args) => StateHasChanged();",
     "}",
 })"/>
 
@@ -85,7 +85,7 @@
 {
 
     bool ParentValue;
-    void Refresh(UIMouseEventArgs args) => StateHasChanged();
+    void Refresh(MouseEventArgs args) => StateHasChanged();
     string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
 
 }

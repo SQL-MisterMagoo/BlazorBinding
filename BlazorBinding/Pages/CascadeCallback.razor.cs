@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,7 +28,7 @@ namespace BlazorBinding.Pages
 			EventList.Add($"{Entity} - {DateTime.Now.ToLongTimeString()} : {Value}");
 		}
 
-		internal void Refresh(UIMouseEventArgs args)
+		internal void Refresh(MouseEventArgs args)
 		{
 			AddEvent("Parent", $"Refresh: {args?.Type ?? "page"}");
 			StateHasChanged();

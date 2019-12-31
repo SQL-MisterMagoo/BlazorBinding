@@ -5,7 +5,7 @@
 @code {
     bool LocalValue { get { return Value; } set { ValueChanged?.Invoke(value); } }
 
-    [Parameter] protected bool Value { get; set; }
+    [Parameter] public bool Value { get; set; }
 
-    [Parameter] protected Action<bool> ValueChanged { get; set; }
+    [Parameter] public Action<bool> ValueChanged { get; set; }
 }

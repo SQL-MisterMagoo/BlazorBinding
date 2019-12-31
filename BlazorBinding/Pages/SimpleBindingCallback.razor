@@ -28,8 +28,8 @@
         <p class="card-text">Here we bind to a local proxy value so we can fire the Callback when the local value changes.</p>
         <DisplayCode Code="@(new[]{"<input type=\"checkbox\" @bind=\"@LocalValue\" />",
             "@functions {",
-            "[Parameter] protected bool Value { get; set; }",
-            "[Parameter] protected Action<bool> Callback { get; set; }",
+            "[Parameter] public bool Value { get; set; }",
+            "[Parameter] public Action<bool> Callback { get; set; }",
             "bool LocalValue { get { return Value; } set { Callback?.Invoke(value); } }",
             "}"
             })"/>
@@ -58,7 +58,7 @@
             "<button id=\"refresh\" @onclick=\"@Refresh\" class=\"btn btn-standard\">Refresh</button>",
             "@functions {",
             "bool ParentValue;",
-            "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+            "void Refresh(MouseEventArgs args) => StateHasChanged();",
             "void UpdateValue(bool value) { ParentValue = value; Refresh(null); })",
             "}"
             })"/>
@@ -68,7 +68,7 @@
 @code
 {
     bool ParentValue;
-    void Refresh(UIMouseEventArgs args) => StateHasChanged();
+    void Refresh(MouseEventArgs args) => StateHasChanged();
     void UpdateValue(bool value) { ParentValue = value; Refresh(null); }
     string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
 }
