@@ -9,9 +9,9 @@
 [Inject] HttpClient httpClient { get; set; }
 MarkupString Contents;
 
-protected async override Task OnInitAsync()
+protected async override Task OnInitializedAsync()
 {
-    await base.OnInitAsync();
+    await base.OnInitializedAsync();
     try
     {
         var stream = await httpClient.GetStringAsync("https://raw.githubusercontent.com/SQL-MisterMagoo/BlazorBinding/master/README.md");

@@ -122,10 +122,10 @@
             "@functions {",
             "  TList activeItem;",
             "",
-            "  [Parameter] protected List<TList> ListData { get;  set; }",
-            "  [Parameter] protected Action<List<TList>> ListDataChanged { get; set; }",
-            "  [Parameter] protected Action<TList,string> ChangeAction { get; set; }",
-            "  [Parameter] protected RenderFragment<TList> ListItemContent { get; set; }",
+            "  [Parameter] public List<TList> ListData { get;  set; }",
+            "  [Parameter] public Action<List<TList>> ListDataChanged { get; set; }",
+            "  [Parameter] public Action<TList,string> ChangeAction { get; set; }",
+            "  [Parameter] public RenderFragment<TList> ListItemContent { get; set; }",
             "",
             "  string GetActive(TList item)",
             "  {",
@@ -170,13 +170,13 @@
             "      StateHasChanged();",
             "  }",
             "",
-            "  void AddNewUser(UIMouseEventArgs args)",
+            "  void AddNewUser(MouseEventArgs args)",
             "  {",
             "      AddingNewUser = \"\";",
             "      PingState = !PingState;",
             "      StateHasChanged();",
             "  }",
-            "  void AddNewUserConfirm(UIMouseEventArgs args)",
+            "  void AddNewUserConfirm(MouseEventArgs args)",
             "  {",
             "      if (string.IsNullOrWhiteSpace(localName) ||",
             "          string.IsNullOrWhiteSpace(localNick) ||",
@@ -192,7 +192,7 @@
             "      AddingNewUser = \"d-none\";",
             "      StateHasChanged();",
             "  }",
-            "  void AddNewUserCancel(UIMouseEventArgs args)",
+            "  void AddNewUserCancel(MouseEventArgs args)",
             "  {",
             "      AddingNewUser = \"d-none\";",
             "      PingState = !PingState;",
@@ -205,7 +205,7 @@
 {
 bool PingState;
 
-void Refresh(UIMouseEventArgs args) => StateHasChanged();
+void Refresh(MouseEventArgs args) => StateHasChanged();
 
 string StateHasChangedCss => PingState ? "ping-on" : "ping-off";
 
@@ -222,13 +222,13 @@ void ListItemChanged(ISampleData item, string action)
     StateHasChanged();
 }
 
-void AddNewUser(UIMouseEventArgs args)
+void AddNewUser(MouseEventArgs args)
 {
     AddingNewUser = "";
     PingState = !PingState;
     StateHasChanged();
 }
-void AddNewUserConfirm(UIMouseEventArgs args)
+void AddNewUserConfirm(MouseEventArgs args)
 {
     if (string.IsNullOrWhiteSpace(localName) ||
         string.IsNullOrWhiteSpace(localNick) ||
@@ -244,7 +244,7 @@ void AddNewUserConfirm(UIMouseEventArgs args)
     AddingNewUser = "d-none";
     StateHasChanged();
 }
-void AddNewUserCancel(UIMouseEventArgs args)
+void AddNewUserCancel(MouseEventArgs args)
 {
     AddingNewUser = "d-none";
     PingState = !PingState;

@@ -50,14 +50,14 @@
 @code
 {
 
-  [Parameter] protected RenderFragment TitleContent { get; set; }
-  [Parameter] protected RenderFragment BodyContent { get; set; }
-  [Parameter] protected RenderFragment BtnPriContent { get; set; }
-  [Parameter] protected RenderFragment BtnSecContent { get; set; }
-  [Parameter] protected Action<UIMouseEventArgs> BtnPriClick { get; set; }
-  [Parameter] protected Action<UIMouseEventArgs> BtnSecClick { get; set; }
+  [Parameter] public RenderFragment TitleContent { get; set; }
+  [Parameter] public RenderFragment BodyContent { get; set; }
+  [Parameter] public RenderFragment BtnPriContent { get; set; }
+  [Parameter] public RenderFragment BtnSecContent { get; set; }
+  [Parameter] public Action<MouseEventArgs> BtnPriClick { get; set; }
+  [Parameter] public Action<MouseEventArgs> BtnSecClick { get; set; }
 
-  ElementRef mmdialogref;
+  ElementReference mmdialogref;
   string Classes = "modal fade";
   string Styles = "display: none;";
   string TitleText;
@@ -82,7 +82,7 @@
   #endregion
 
   #region "Internal Actions"
-  protected void BtnPriClickInternal(UIMouseEventArgs args)
+  protected void BtnPriClickInternal(MouseEventArgs args)
   {
       if (BtnPriClick == null)
       {
@@ -95,7 +95,7 @@
           BtnPriClick.Invoke(args);
       }
   }
-  protected void BtnSecClickInternal(UIMouseEventArgs args)
+  protected void BtnSecClickInternal(MouseEventArgs args)
   {
       if (BtnSecClick == null)
       {
@@ -108,7 +108,7 @@
           BtnSecClick.Invoke(args);
       }
   }
-  protected void CloseDialog(UIMouseEventArgs args)
+  protected void CloseDialog(MouseEventArgs args)
   {
       Console.WriteLine("Close Button");
       Hide();
@@ -136,17 +136,17 @@
       Console.WriteLine($"New Sec: {Btn}");
       BtnSecText = Btn;
   }
-  public void SetBtnPriCallback(Action<UIMouseEventArgs> Callback)
+  public void SetBtnPriCallback(Action<MouseEventArgs> Callback)
   {
       BtnPriClick = Callback;
   }
-  public void SetBtnSecCallback(Action<UIMouseEventArgs> Callback)
+  public void SetBtnSecCallback(Action<MouseEventArgs> Callback)
   {
       BtnSecClick = Callback;
   }
   #endregion
 
-  protected override void OnInit()
+  protected override void OnInitialized()
   {
       if (TitleContent == null && TitleText == null) SetTitle("Information");
       if (BodyContent == null && BodyText == null) SetBody("This is a sample dialog, with default values.");

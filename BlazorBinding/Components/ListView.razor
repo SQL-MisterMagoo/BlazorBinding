@@ -25,10 +25,10 @@ else
 {
 TList activeItem;
 
-[Parameter] protected List<TList> ListData { get; set; }
-[Parameter] protected Action<List<TList>> ListDataChanged { get; set; }
-[Parameter] protected Action<TList, string> ChangeAction { get; set; }
-[Parameter] protected RenderFragment<TList> ListItemContent { get; set; }
+[Parameter] public List<TList> ListData { get; set; }
+[Parameter] public Action<List<TList>> ListDataChanged { get; set; }
+[Parameter] public Action<TList, string> ChangeAction { get; set; }
+[Parameter] public RenderFragment<TList> ListItemContent { get; set; }
 
 string GetActive(TList item)
 {

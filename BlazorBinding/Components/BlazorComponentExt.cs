@@ -7,12 +7,12 @@ namespace BlazorBinding.Components
 {
     public partial class BlazorComponentExt : ComponentBase
 	{
-		[Blazor.Parameter] protected RenderFragment Body { get; set; }
+		[Blazor.Parameter] public RenderFragment Body { get; set; }
 
-		protected override void OnInit()
+		protected override void OnInitialized()
 		{
 			Console.WriteLine("MYINIT");
-			base.OnInit();
+			base.OnInitialized();
 			RegisterModels(GetType());
 		}
 

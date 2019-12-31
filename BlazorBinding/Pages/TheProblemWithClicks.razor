@@ -16,7 +16,7 @@
             "@functions {",
             "bool ParentPingValue;",
             "string ParentPingCss => ParentPingValue ? \"ping-on\" : \"ping-off\";",
-            "void OnParentClick(UIMouseEventArgs args) => ParentPingValue = !ParentPingValue;",
+            "void OnParentClick(MouseEventArgs args) => ParentPingValue = !ParentPingValue;",
             "}",
         })" />
         <div class="card" @onclick="@OnChildClick">
@@ -33,7 +33,7 @@
                     "@functions {",
                     "bool ChildPingValue;",
                     "string ChildPingCss => ChildPingValue ? \"ping-on\" : \"ping-off\";",
-                    "void OnChildClick(UIMouseEventArgs args) => ChildPingValue = !ChildPingValue;",
+                    "void OnChildClick(MouseEventArgs args) => ChildPingValue = !ChildPingValue;",
                     "}",
                 })" />
                 <div class="card" @onclick="@(OnGrandChildClick)">
@@ -50,7 +50,7 @@
                                 "@functions {",
                                 "bool GrandChildPingValue;",
                                 "string GrandChildPingCss => GrandChildPingValue ? \"ping-on\" : \"ping-off\";",
-                                "void OnGrandChildClick(UIMouseEventArgs args) => GrandChildPingValue = !GrandChildPingValue;",
+                                "void OnGrandChildClick(MouseEventArgs args) => GrandChildPingValue = !GrandChildPingValue;",
                                 "}",
                             })" />
                     </div>
@@ -64,13 +64,13 @@
 {
 bool ParentPingValue;
 string ParentPingCss => ParentPingValue ? "ping-on" : "ping-off";
-void OnParentClick(UIMouseEventArgs args) { ParentPingValue = !ParentPingValue; StateHasChanged(); }
+void OnParentClick(MouseEventArgs args) { ParentPingValue = !ParentPingValue; StateHasChanged(); }
 
 bool ChildPingValue;
 string ChildPingCss => ChildPingValue ? "ping-on" : "ping-off";
-void OnChildClick(UIMouseEventArgs args) { ChildPingValue = !ChildPingValue; StateHasChanged(); }
+void OnChildClick(MouseEventArgs args) { ChildPingValue = !ChildPingValue; StateHasChanged(); }
 
 bool GrandChildPingValue;
 string GrandChildPingCss => GrandChildPingValue ? "ping-on" : "ping-off";
-void OnGrandChildClick(UIMouseEventArgs args) { GrandChildPingValue = !GrandChildPingValue; StateHasChanged(); }
+void OnGrandChildClick(MouseEventArgs args) { GrandChildPingValue = !GrandChildPingValue; StateHasChanged(); }
 }

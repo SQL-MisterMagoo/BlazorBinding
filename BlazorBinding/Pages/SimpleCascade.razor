@@ -74,7 +74,7 @@
     Code="@(new[]{
     "@functions {",
     "bool ParentValue;",
-    "void Refresh(UIMouseEventArgs args) => StateHasChanged();",
+    "void Refresh(MouseEventArgs args) => StateHasChanged();",
     "}",
 })"/>
 
@@ -82,7 +82,7 @@
 {
 
     bool ParentValue;
-    void Refresh(UIMouseEventArgs args) => StateHasChanged();
+    void Refresh(MouseEventArgs args) => StateHasChanged();
     string StateHasChangedCss => ParentValue ? "ping-on" : "ping-off";
 
 }
